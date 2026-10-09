@@ -305,3 +305,29 @@ body{background:#f8fbfd}
 @media(max-width:1100px){.grid.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.provinces{grid-template-columns:repeat(4,minmax(0,1fr))}.office-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:850px){.discovery-layout{grid-template-columns:1fr}.provinces{grid-template-columns:repeat(4,minmax(0,1fr))}.stats{margin-inline:-24px}.hero{background-position:center,70% center,center}}
 @media(max-width:580px){.hero{background-image:linear-gradient(95deg,rgba(5,28,51,.94),rgba(7,39,65,.74)),url("assets/nepal-temple-banner-mobile.webp"),url("assets/nepal-heritage-hero.svg");background-position:center,66% center,center;padding-top:34px}.hero-badge{font-size:10px}.hero h1{font-size:clamp(29px,7.9vw,42px)}.hero p{font-size:14px}.hero .search{margin-top:17px}.stats{margin-inline:-17px;grid-template-columns:repeat(2,1fr)}.stats>div{padding:14px 8px 14px 47px;min-height:81px}.stats .stat-icon{left:9px;top:18px}.stats strong{font-size:22px}.stats small{font-size:9px}.grid.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.category-grid .card{min-height:168px;padding:14px 12px}.provinces{grid-template-columns:repeat(2,minmax(0,1fr))}.province{min-height:100px}.loksewa-grid,.office-list{grid-template-columns:1fr}.province-panel-intro{flex-direction:column}.section{padding:35px 0}}
+
+/* Phase 14 citizen resources: accessible, calm, compact and responsive. */
+.civic-resource-section{background:#f5fafc}
+.civic-resource-section .civic-emergency,.civic-provinces,.civic-guides{margin:24px 0 35px}
+.civic-subhead h3{font-size:clamp(19px,2vw,24px);margin:0 0 6px;color:#103251}
+.civic-subhead p{font-size:13px;color:#5e7889;line-height:1.7;margin:0 0 16px}
+.civic-card-grid{display:grid;gap:13px}
+.emergency-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.province-government-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.guides-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.civic-card{background:#fff;border:1px solid #dce9f0;border-radius:14px;padding:19px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;box-shadow:0 6px 18px rgba(10,48,78,.05);min-width:0}
+.civic-card h4{font-size:16px;line-height:1.35;margin:0;color:#153954}
+.civic-card p{font-size:13px;line-height:1.65;color:#526a7b;margin:0}
+.civic-card small{font-size:11px;color:#75889a;overflow-wrap:anywhere}
+.civic-emoji{display:grid;place-items:center;width:44px;height:44px;background:#eaf6fc;border-radius:12px;font-size:22px}
+.civic-call{font-size:clamp(25px,3vw,36px);font-weight:850;color:#0b5676;line-height:1.2}
+.civic-go,.civic-source{font-size:13px;color:#076c88;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.civic-go{margin-top:auto}
+.civic-source{font-size:12px;margin-top:auto}
+.civic-small{margin-top:8px!important}
+.civic-safety{background:#eaf5f9;border:1px solid #cde5ef;border-radius:16px;padding:22px}
+.civic-safety h3{margin:0 0 12px;font-size:19px}
+.civic-safety ol{padding-left:22px;display:grid;gap:8px}
+.civic-safety li,.civic-safety p{font-size:13px;line-height:1.7;color:#35566b}
+@media(max-width:950px){.emergency-grid,.province-government-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guides-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.civic-card{padding:14px}.civic-card h4{font-size:14px}.civic-call{font-size:29px}.guides-grid{grid-template-columns:1fr}.civic-safety{padding:16px}}
