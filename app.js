@@ -61,13 +61,41 @@ function render() {
   renderRegions();
 }
 
+function initOfficeFilters() {
+  const provinceSelect = $("officeProvince");
+  const districtSelect = $("officeDistrict");
+  const regionNames = NEPAL_REGIONS.map(region => region.name);
+  provinceSelect.innerHTML = '<option value="All">All provinces</option>' + regionNames.map(name =>
+    '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>'
+  ).join("");
+  const refreshDistrictOptions = () => {
+    const selectedProvince = provinceSelect.value;
+    const previous = districtSelect.value;
+    const districts = [...new Set(GOVERNMENT_OFFICES
+      .filter(office => selectedProvince === "All" || office.province === selectedProvince)
+      .map(office => office.district))].sort();
+    districtSelect.innerHTML = '<option value="All">All headquarters districts</option>' +
+      districts.map(name => '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>').join("");
+    districtSelect.value = districts.includes(previous) ? previous : "All";
+    renderOffices();
+  };
+  $("officeSearch").addEventListener("input", renderOffices);
+  $("officeCategory").addEventListener("change", renderOffices);
+  $("officeLevel").addEventListener("change", renderOffices);
+  districtSelect.addEventListener("change", renderOffices);
+  provinceSelect.addEventListener("change", refreshDistrictOptions);
+  refreshDistrictOptions();
+}
+
 function renderOffices() {
   const officeQuery = $("officeSearch").value.trim().toLocaleLowerCase();
   const officeCategory = $("officeCategory").value;
+  const officeProvince = $("officeProvince").value;
   const officeDistrict = $("officeDistrict").value;
   const officeLevel = $("officeLevel").value;
   const matches = GOVERNMENT_OFFICES.filter(office =>
     (officeCategory === "All" || office.category === officeCategory) &&
+    (officeProvince === "All" || office.province === officeProvince) &&
     (officeDistrict === "All" || office.district === officeDistrict) &&
     (officeLevel === "All" || office.level === officeLevel) &&
     (!officeQuery || [office.name, office.nameNe, office.category, office.level, office.city, office.province, office.district, office.description]
@@ -79,10 +107,10 @@ function renderOffices() {
     ' · ' + escapeHtml(office.level) + '</span><span class="verified-label">Official homepage checked</span></div><h3>' + escapeHtml(office.name) +
     '</h3><p class="office-ne">' + escapeHtml(office.nameNe) +
     '</p><p>' + escapeHtml(office.description) +
-    '</p><p><strong>Headquarters:</strong> ' + escapeHtml(office.city) +
+    '</p><p><strong>Location:</strong> ' + escapeHtml(office.city) + ', ' + escapeHtml(office.province) + ' Province' +
     '</p><p><strong>Last checked:</strong> ' + escapeHtml(office.checkedOn) +
     '</p><a class="office-link" target="_blank" rel="noopener noreferrer" href="' + escapeHtml(office.website) +
-    '">Open official department website ↗</a><p class="office-source">Source: <a target="_blank" rel="noopener noreferrer" href="' +
+    '">Open official government website ↗</a><p class="office-source">Source: <a target="_blank" rel="noopener noreferrer" href="' +
     escapeHtml(office.sourceUrl) + '">' + escapeHtml(new URL(office.sourceUrl).hostname) + '</a></p></article>'
   ).join("") : '<p class="empty">No matching verified department homepages. Try another name or category.</p>';
 }
@@ -107,15 +135,11 @@ function showService(id) {
 function closeModal() {
   if(!$("modal").classList.contains("show"))return;
   $("modal").classList.remove("show");
-  $("officeSearch").addEventListener("input", renderOffices);
-  $("officeCategory").addEventListener("change", renderOffices);
-  $("officeDistrict").addEventListener("change", renderOffices);
-  $("officeLevel").addEventListener("change", renderOffices);
-  renderOffices();
   $("modal").setAttribute("aria-hidden","true");
   if(previousFocus&&typeof previousFocus.focus==="function")previousFocus.focus();
 }
 document.addEventListener("DOMContentLoaded",()=>{
+  initOfficeFilters();
   $("modal").setAttribute("aria-hidden","true");
   $("modal").setAttribute("aria-labelledby","dialogTitle");
   $("searchForm").addEventListener("submit",event=>{
