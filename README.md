@@ -25,6 +25,23 @@ The office index now contains 10 organizations: seven federal departments and **
 
 The directory can filter headquarters by Kathmandu, Lalitpur or Bhaktapur district and by Federal/Local level. These **headquarters filters are separate** from province/district browsing: selecting a district in the geography navigator does not assert which government services are available there. `homepage-verified` only means the organization and its official homepage were checked. Do not publish application fees, hours, direct contacts, ward-level services or sub-offices without further verification.
 
+## Phase 5: All-seven-province starter coverage
+
+Six additional local-government websites have been checked against their first-party government homepages (2026-10-09), bringing the office index to **16 organization records: seven federal and nine local**, with at least one local government in each of Nepal's seven provinces.
+
+| Province | Local government added | Official source |
+| --- | --- | --- |
+| Koshi | Biratnagar Metropolitan City | https://biratnagarmun.gov.np/en |
+| Madhesh | Janakpurdham Sub-Metropolitan City | https://janakpurmun.gov.np/en |
+| Gandaki | Pokhara Metropolitan City | https://pokharamun.gov.np/ |
+| Lumbini | Butwal Sub-Metropolitan City | https://butwalmun.gov.np/ |
+| Karnali | Birendranagar Municipality | https://birendranagarmun.gov.np/en |
+| Sudurpashchim | Dhangadhi Sub-Metropolitan City | https://dhangadhimun.gov.np/ |
+
+Bagmati already has three local-government entries from Phase 4. Office filters for province and headquarters district are now generated from actual records, rather than a fixed list. A bug where office search listeners only initialized after closing a service modal was also fixed.
+
+**Limit:** one record in a province does not establish a complete municipal roster, verified service availability, or the total number of local governments listed. Government procedures, fees, ward offices and contacts require further fact-checking. Existing federal headquarters remain indexed in Bagmati only.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
