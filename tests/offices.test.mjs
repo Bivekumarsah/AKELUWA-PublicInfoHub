@@ -12,7 +12,7 @@ test("all published offices have unique IDs, homepage sources and check dates", 
   for (const record of offices) {
     assert.equal(record.level, "Federal");
     assert.equal(record.status, "homepage-verified");
-    assert.match(record.checkedOn, /^\\d{4}-\\d{2}-\\d{2}$/);
+    assert.equal(Number.isNaN(Date.parse(record.checkedOn)), false);
     assert.equal(record.checkedOn, "2026-10-09");
     assert.ok(record.name && record.nameNe && record.city && record.description);
     const official = new URL(record.website);
