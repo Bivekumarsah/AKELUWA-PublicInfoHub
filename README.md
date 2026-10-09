@@ -121,6 +121,14 @@ The page applies these parameters on initial load. Invalid values are discarded,
 
 **Manual preview tests:** select Bagmati → Kavrepalanchok → Local, then copy the link and open it in a private tab; confirm the same filtered results. Check an English/Nepali language switch, clear/reset filters, use the share button in both languages, and test a malformed URL such as `?province=Invalid&district=Wrong`. Test both standalone and company-domain routes after production deployment. Query URLs remain canonically associated with the Phase 10 company-domain directory homepage.
 
+## GitHub Pages online preview (independent of Vercel)
+
+This repository includes a `PublicInfoHub GitHub Pages preview` workflow on `feature/**` branches. It runs the project tests and publishes only the actual static HTML, CSS, JavaScript and brand assets, with a **noindex** robots directive on the review build. The preview does not affect the company domain or the Vercel production deployment.
+
+**One-time setup by repository administrator:** in GitHub open **Settings → Pages → Build and deployment → Source → GitHub Actions**, and save. GitHub's default Actions token cannot create/enable a Pages site automatically. Once enabled, rerun the latest **PublicInfoHub GitHub Pages preview** workflow through **Actions**. On success, find the live link under the `github-pages` environment or deploy job. The expected project Pages URL pattern is `https://bivekumarsah.github.io/AKELUWA-PublicInfoHub/`, but the actual link is confirmed only after a successful deployment.
+
+GitHub Pages has its own limits and workflow usage; it does **not** count toward the Vercel deployment limit. Because this repository has a single Pages site, publishing a different feature branch can replace the previous Pages preview. It is a review environment, not a separate permanent production domain.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
