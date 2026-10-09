@@ -42,6 +42,22 @@ Bagmati already has three local-government entries from Phase 4. Office filters 
 
 **Limit:** one record in a province does not establish a complete municipal roster, verified service availability, or the total number of local governments listed. Government procedures, fees, ward offices and contacts require further fact-checking. Existing federal headquarters remain indexed in Bagmati only.
 
+## Phase 6: Seven additional municipal official-source links
+
+Phase 6 adds seven local governments to the source-backed directory, bringing the index to **23 organizations: 16 local governments and 7 federal departments**. This remains a curated *subset*, not a directory of all 753 local governments. Each entry includes a government homepage/source and a dated review (2026-10-09).
+
+| Province | New organization | First-party government source |
+| --- | --- | --- |
+| Koshi | Itahari Sub-Metropolitan City (Sunsari) | https://www.itaharimun.gov.np/en/node/32 |
+| Madhesh | Birgunj Metropolitan City (Parsa) | https://www.birgunjmun.gov.np/en |
+| Bagmati | Bharatpur Metropolitan City (Chitwan) | https://bharatpurmun.gov.np/en |
+| Bagmati | Hetauda Sub-Metropolitan City (Makwanpur) | https://hetaudamun.gov.np/en |
+| Gandaki | Gorkha Municipality (Gorkha) | https://gorkhamun.gov.np/en |
+| Lumbini | Ghorahi Sub-Metropolitan City (Dang) | https://www.ghorahimun.gov.np/en/content/welcome-official-website-ghorahi-sub-metropolitan-city |
+| Sudurpashchim | Tikapur Municipality (Kailali) | https://tikapurmun.gov.np/en |
+
+The office index now reports the actual number of records and provides a reset control for government-office filters. It does not claim that these sites provide every service, fee, application requirement, or ward-level contact. The offices' listed headquarters district is **not** a service-availability filter.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
