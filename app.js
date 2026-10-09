@@ -18,7 +18,7 @@ const renderButton = (label, type, active) =>
 
 function renderRegions() {
   $("provinces").innerHTML = NEPAL_REGIONS.map(region =>
-    '<button type="button" class="province'+(region.name===province?' active':'')+'" data-province="'+escapeHtml(region.name)+'" aria-pressed="'+(region.name===province)+'"><span>'+escapeHtml(region.name)+'</span><span>'+region.districts.length+' districts →</span></button>'
+    '<button type="button" class="province'+(region.name===province?' active':'')+'" data-province="'+escapeHtml(region.name)+'" aria-pressed="'+(region.name===province)+'"><span>'+escapeHtml(uiProvince(region.name))+'</span><span>'+uiDigits(region.districts.length)+(uiLanguage==='ne'?' जिल्ला →':' districts →')</span></button>'
   ).join("");
   const selected=regionFor(province);
   const visible=selected ? selected.districts.filter(name=>name.toLowerCase().includes(query)) :
@@ -143,7 +143,7 @@ function renderOffices() {
     '</p><p><strong>' + escapeHtml(uiText('Location:')) + '</strong> ' + escapeHtml(office.city) + ', ' + escapeHtml(uiProvince(office.province)) + (uiLanguage === 'ne' ? ' प्रदेश' : ' Province') +
     '</p><p><strong>' + escapeHtml(uiText('Last checked:')) + '</strong> ' + escapeHtml(uiDigits(office.checkedOn)) +
     '</p><a class="office-link" target="_blank" rel="noopener noreferrer" href="' + escapeHtml(office.website) +
-    '">Open official government website ↗</a><p class="office-source">Source: <a target="_blank" rel="noopener noreferrer" href="' +
+    '">'+escapeHtml(uiText('Open official government website ↗'))+'</a><p class="office-source">'+escapeHtml(uiText('Source:'))+' <a target="_blank" rel="noopener noreferrer" href="' +
     escapeHtml(office.sourceUrl) + '">' + escapeHtml(new URL(office.sourceUrl).hostname) + '</a></p></article>'
   ).join("") : '<p class="empty">'+escapeHtml(uiText('No matching organization homepages. Try resetting the office filters.'))+'</p>';
 }
@@ -158,7 +158,7 @@ function showService(id) {
     '<div class="symbol">'+escapeHtml(item.icon)+'</div><span class="tag">'+escapeHtml(uiText(item.category))+'</span><h2 id="dialogTitle">'+escapeHtml(uiText(item.name))+'</h2>'+
     '<p class="muted">'+escapeHtml(uiText(item.desc))+'</p><p><strong>'+escapeHtml(uiText('Responsible organization:'))+'</strong> '+escapeHtml(uiText(item.agency))+'</p>'+
     '<p><strong>'+escapeHtml(uiText('Scope:'))+'</strong> '+escapeHtml(uiText(item.scope))+'</p><p><strong>'+escapeHtml(uiText('Source:'))+'</strong> '+(uiLanguage === 'ne' ? 'सम्बन्धित विभागको वेबसाइट; वर्तमान प्रक्रिया आधिकारिक साइटमा पुष्टि गर्नुहोस्।' : 'Department homepage; confirm current procedures on the official site.')+'</p>'+
-    '<p><a href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener noreferrer">Open government website ↗</a></p>'+
+    '<p><a href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(uiText('Open government website ↗'))+'</a></p>'+
     '<p class="muted">'+escapeHtml(uiText('Fees, requirements, deadlines and processing times are not verified here.'))+'</p>';
   $("modal").classList.add("show");
   $("modal").setAttribute("aria-hidden","false");
@@ -188,6 +188,24 @@ document.addEventListener("DOMContentLoaded",()=>{
   primaryNav.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
   document.addEventListener("click", event => {
     if (!primaryNav.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+  });
+  translateStaticUi();
+  $("langSwitch").addEventListener("click", () => {
+    if ($("modal").classList.contains("show")) closeModal();
+    uiLanguage = uiLanguage === "en" ? "ne" : "en";
+    translateStaticUi();
+    for(const id of ["officeCategory","officeLevel"]){
+      [...$(id).options].forEach(option => {
+        option.textContent=uiText(option.value === "All" ? (id === "officeCategory" ? "All categories" : "All government levels") : option.value === "Federal" ? "Federal departments" : option.value === "Local" ? "Local governments" : option.value);
+      });
+    }
+    [...$("officeProvince").options].forEach(option => {option.textContent=option.value === "All" ? uiText("All provinces") : uiProvince(option.value);});
+    [...$("officeDistrict").options].forEach(option => {option.textContent=option.value === "All" ? uiText("All headquarters districts") : option.value;});
+    const locals=GOVERNMENT_OFFICES.filter(office=>office.level==="Local").length;
+    const coverage=new Set(GOVERNMENT_OFFICES.filter(office=>office.level==="Local").map(office=>office.province)).size;
+    $("officeSummary").textContent=uiLanguage==="ne" ? uiDigits(GOVERNMENT_OFFICES.length)+" सूचीकृत सरकारी वेबसाइट ("+uiDigits(locals)+" स्थानीय तह, "+uiDigits(GOVERNMENT_OFFICES.length-locals)+" संघीय विभाग), "+uiDigits(coverage)+" प्रदेशमा। यो आंशिक निर्देशिका हो, पूर्ण राष्ट्रिय अभिलेख होइन।" : GOVERNMENT_OFFICES.length+" indexed government organization homepages ("+locals+" local governments, "+(GOVERNMENT_OFFICES.length-locals)+" federal departments) across "+coverage+" provinces. This is a partial directory, not a complete nationwide registry.";
+    render();
+    renderOffices();
   });
   initOfficeFilters();
   $("modal").setAttribute("aria-hidden","true");
