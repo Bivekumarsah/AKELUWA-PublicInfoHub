@@ -21,3 +21,5 @@ jobs:
           node --check app.js
           node --check offices.js
           node --check i18n.js
+          node --check loksewa-data.js
+          node --check loksewa.js
