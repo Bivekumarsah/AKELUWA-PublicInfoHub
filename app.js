@@ -172,6 +172,7 @@ function closeModal() {
   if(previousFocus&&typeof previousFocus.focus==="function")previousFocus.focus();
 }
 document.addEventListener("DOMContentLoaded",()=>{
+  const footerYear=$("footerYear");if(footerYear)footerYear.textContent=String(new Date().getFullYear());
   $("districtOfficeAction").addEventListener("click", openSelectedDistrictOffices);
   const menuToggle = $("menuToggle");
   const primaryNav = $("primaryNav");
