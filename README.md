@@ -2,6 +2,10 @@
 
 A lightweight standalone geographic directory with seven provinces, 77 districts, searchable names, sample service filters, service detail dialogs and links to government department homepages.
 
+## PublicInfoHub branding
+
+The responsive navigation header displays `assets/publicinfohub-logo.webp`, resized directly from the user's approved blue-A-and-globe artwork. The browser favicon at `assets/publicinfohub-favicon.webp` uses the **same exact design**, resized for a tab icon (no substituted information emblem). Both are self-hosted in the PublicInfoHub repository and work through the `/publicinfohub/` nested route; they do not affect the main AKELUWA company logo or AKELUWA Toolbox. Because these are compact web assets, retain the original high-resolution master image for future marketing and print design.
+
 ## Local setup
 Download/clone the repo and open index.html in a browser, or run `python -m http.server 8000` and open http://localhost:8000.
 
@@ -41,6 +45,22 @@ Six additional local-government websites have been checked against their first-p
 Bagmati already has three local-government entries from Phase 4. Office filters for province and headquarters district are now generated from actual records, rather than a fixed list. A bug where office search listeners only initialized after closing a service modal was also fixed.
 
 **Limit:** one record in a province does not establish a complete municipal roster, verified service availability, or the total number of local governments listed. Government procedures, fees, ward offices and contacts require further fact-checking. Existing federal headquarters remain indexed in Bagmati only.
+
+## Phase 6: Seven additional municipal official-source links
+
+Phase 6 adds seven local governments to the source-backed directory, bringing the index to **23 organizations: 16 local governments and 7 federal departments**. This remains a curated *subset*, not a directory of all 753 local governments. Each entry includes a government homepage/source and a dated review (2026-10-09).
+
+| Province | New organization | First-party government source |
+| --- | --- | --- |
+| Koshi | Itahari Sub-Metropolitan City (Sunsari) | https://www.itaharimun.gov.np/en/node/32 |
+| Madhesh | Birgunj Metropolitan City (Parsa) | https://www.birgunjmun.gov.np/en |
+| Bagmati | Bharatpur Metropolitan City (Chitwan) | https://bharatpurmun.gov.np/en |
+| Bagmati | Hetauda Sub-Metropolitan City (Makwanpur) | https://hetaudamun.gov.np/en |
+| Gandaki | Gorkha Municipality (Gorkha) | https://gorkhamun.gov.np/en |
+| Lumbini | Ghorahi Sub-Metropolitan City (Dang) | https://www.ghorahimun.gov.np/en/content/welcome-official-website-ghorahi-sub-metropolitan-city |
+| Sudurpashchim | Tikapur Municipality (Kailali) | https://tikapurmun.gov.np/en |
+
+The office index now reports the actual number of records and provides a reset control for government-office filters. It does not claim that these sites provide every service, fee, application requirement, or ward-level contact. The offices' listed headquarters district is **not** a service-availability filter.
 
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
