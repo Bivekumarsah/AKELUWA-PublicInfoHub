@@ -37,3 +37,21 @@ test("Phase 13 styles responsive, readable, keyboard-accessible UI",async()=>{
  assert.ok(i18n.includes('Public services.<br><span>Clear paths to the right place.</span>'));
  assert.ok(i18n.includes('const icon=el.querySelector(".stat-icon")'));
 });
+
+test("Nepal heritage hero is original local artwork and all six categories are functional",async()=>{
+ const html=await read("index.html");
+ const css=await read("styles.css");
+ const app=await read("app.js");
+ const words=await read("i18n.js");
+ const art=await read("assets/nepal-heritage-hero.svg");
+ assert.ok(art.startsWith("<svg"));
+ assert.ok(art.includes("traditional pagoda architecture"));
+ assert.ok(css.includes('url("assets/nepal-heritage-hero.svg")'));
+ assert.ok(css.includes("background-position:62% center"));
+ assert.equal((html.match(/class="symbol icon-/g)||[]).length,6);
+ assert.ok(html.includes('class="symbol icon-local"'));
+ assert.ok(app.includes('if(index===5){$("provinces-section").scrollIntoView'));
+ assert.ok(words.includes('"Local Services":"स्थानीय सेवाहरू"'));
+ assert.ok(app.includes("province-icon"));
+ assert.ok(!html.includes("akeluwasoftwarehub.gov.np"));
+});
