@@ -2,6 +2,10 @@
 
 A lightweight standalone geographic directory with seven provinces, 77 districts, searchable names, sample service filters, service detail dialogs and links to government department homepages.
 
+## PublicInfoHub branding
+
+The responsive navigation header displays `assets/publicinfohub-logo.webp`, prepared from the approved AKELUWA blue-A/globe/information logo artwork. The browser tab uses a matching circular-information favicon at `assets/publicinfohub-favicon.webp`. Both are self-hosted in the PublicInfoHub repository and work through the `/publicinfohub/` nested route; they do not affect the main AKELUWA company logo or AKELUWA Toolbox. Because these are compact web assets, retain the original high-resolution master image for future marketing and print design.
+
 ## Local setup
 Download/clone the repo and open index.html in a browser, or run `python -m http.server 8000` and open http://localhost:8000.
 
