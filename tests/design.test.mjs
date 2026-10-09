@@ -34,7 +34,7 @@ test("Phase 13 styles responsive, readable, keyboard-accessible UI",async()=>{
  assert.ok(css.includes("prefers-reduced-motion"));
  assert.ok(css.includes("@media(max-width:580px)"));
  assert.ok(i18n.includes('"Privacy notice":"गोपनीयता सूचना"'));
- assert.ok(i18n.includes('Public services.<br><span>Clear paths to the right place.</span>'));
+ assert.ok(i18n.includes('Public services, offices, and<br><span>official links — in one trusted place.</span>'));
  assert.ok(i18n.includes('const icon=el.querySelector(".stat-icon")'));
 });
 
@@ -47,7 +47,7 @@ test("Nepal heritage hero is original local artwork and all six categories are f
  assert.ok(art.startsWith("<svg"));
  assert.ok(art.includes("traditional pagoda architecture"));
  assert.ok(css.includes('url("assets/nepal-heritage-hero.svg")'));
- assert.ok(css.includes("background-position:62% center"));
+ assert.ok(css.includes('url("assets/nepal-temple-banner.webp")'));
  assert.equal((html.match(/class="symbol icon-/g)||[]).length,6);
  assert.ok(html.includes('class="symbol icon-local"'));
  assert.ok(app.includes('if(index===5){$("provinces-section").scrollIntoView'));
