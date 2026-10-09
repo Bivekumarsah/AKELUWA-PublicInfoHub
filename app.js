@@ -151,13 +151,35 @@ function closeModal() {
   if(previousFocus&&typeof previousFocus.focus==="function")previousFocus.focus();
 }
 document.addEventListener("DOMContentLoaded",()=>{
+  const menuToggle = $("menuToggle");
+  const primaryNav = $("primaryNav");
+  function closeMenu() {
+    primaryNav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+  }
+  menuToggle.addEventListener("click", () => {
+    const opened = primaryNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(opened));
+    menuToggle.setAttribute("aria-label", opened ? "Close navigation menu" : "Open navigation menu");
+  });
+  primaryNav.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+  document.addEventListener("click", event => {
+    if (!primaryNav.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+  });
   initOfficeFilters();
   $("modal").setAttribute("aria-hidden","true");
   $("modal").setAttribute("aria-labelledby","dialogTitle");
   $("searchForm").addEventListener("submit",event=>{
     event.preventDefault();query=$("searchInput").value.trim().toLowerCase();render();
     const districtMatches=NEPAL_REGIONS.some(region=>region.name.toLowerCase().includes(query)||region.districts.some(d=>d.toLowerCase().includes(query)));
-    $(districtMatches?"provinces-section":"services").scrollIntoView({behavior:"smooth"});
+    const serviceMatches=services.some(item=>searchText(item).includes(query));
+    const officeMatches=GOVERNMENT_OFFICES.some(item=>[item.name,item.nameNe,item.city,item.province,item.district,item.category].join(" ").toLocaleLowerCase().includes(query));
+    if(officeMatches && !serviceMatches && !districtMatches) {
+      $("officeSearch").value=$("searchInput").value.trim();
+      renderOffices();
+    }
+    $(districtMatches?"provinces-section":serviceMatches?"services":officeMatches?"offices":"services").scrollIntoView({behavior:"smooth"});
   });
   $("clearFilters").addEventListener("click",()=>{
     query="";category="All";province="";district="";$("searchInput").value="";render();
@@ -165,13 +187,18 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll("#categories .card").forEach((card,index)=>{
     card.addEventListener("click",event=>{
       event.preventDefault();
+      if (index === 0) {
+        $("offices").scrollIntoView({behavior:"smooth"});
+        $("officeSearch").focus({preventScroll:true});
+        return;
+      }
       category=[ "All","Identity","Business","Transport" ][index];
       render();$("services").scrollIntoView({behavior:"smooth"});
     });
   });
   $("modal").addEventListener("click",event=>{if(event.target===$("modal"))closeModal()});
   document.addEventListener("keydown",event=>{
-    if(event.key==="Escape")closeModal();
+    if(event.key==="Escape"){closeModal();closeMenu();}
     if(event.key==="Tab"&&$("modal").classList.contains("show")){
       const focusables=[...$("detail").querySelectorAll("button,a[href]")];
       const first=focusables[0],last=focusables[focusables.length-1];
