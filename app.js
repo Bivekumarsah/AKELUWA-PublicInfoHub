@@ -64,15 +64,19 @@ function render() {
 function renderOffices() {
   const officeQuery = $("officeSearch").value.trim().toLocaleLowerCase();
   const officeCategory = $("officeCategory").value;
+  const officeDistrict = $("officeDistrict").value;
+  const officeLevel = $("officeLevel").value;
   const matches = GOVERNMENT_OFFICES.filter(office =>
     (officeCategory === "All" || office.category === officeCategory) &&
-    (!officeQuery || [office.name, office.nameNe, office.category, office.city, office.province, office.district, office.description]
+    (officeDistrict === "All" || office.district === officeDistrict) &&
+    (officeLevel === "All" || office.level === officeLevel) &&
+    (!officeQuery || [office.name, office.nameNe, office.category, office.level, office.city, office.province, office.district, office.description]
       .join(" ").toLocaleLowerCase().includes(officeQuery))
   );
-  $("officeCount").textContent = matches.length + " verified department homepage" + (matches.length === 1 ? "" : "s") + " found";
+  $("officeCount").textContent = matches.length + " checked government organization homepage" + (matches.length === 1 ? "" : "s") + " found";
   $("officeGrid").innerHTML = matches.length ? matches.map(office =>
     '<article class="card office-card"><div class="office-meta"><span class="tag">' + escapeHtml(office.category) +
-    '</span><span class="verified-label">Official homepage checked</span></div><h3>' + escapeHtml(office.name) +
+    ' · ' + escapeHtml(office.level) + '</span><span class="verified-label">Official homepage checked</span></div><h3>' + escapeHtml(office.name) +
     '</h3><p class="office-ne">' + escapeHtml(office.nameNe) +
     '</p><p>' + escapeHtml(office.description) +
     '</p><p><strong>Headquarters:</strong> ' + escapeHtml(office.city) +
@@ -105,6 +109,8 @@ function closeModal() {
   $("modal").classList.remove("show");
   $("officeSearch").addEventListener("input", renderOffices);
   $("officeCategory").addEventListener("change", renderOffices);
+  $("officeDistrict").addEventListener("change", renderOffices);
+  $("officeLevel").addEventListener("change", renderOffices);
   renderOffices();
   $("modal").setAttribute("aria-hidden","true");
   if(previousFocus&&typeof previousFocus.focus==="function")previousFocus.focus();
