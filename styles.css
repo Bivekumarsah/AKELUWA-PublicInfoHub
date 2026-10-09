@@ -103,3 +103,9 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
 @media(min-width:851px){.language-switch{order:3}.nav>.pill{order:2}.links{order:1}}
 @media(max-width:850px){.language-switch{margin-left:0;order:1}.menu-toggle{order:2;margin-left:0}.brand{margin-right:auto}.links{order:4}}
 @media(max-width:430px){.language-switch{padding:9px 8px;font-size:12px}.menu-toggle{padding:9px 8px}.brand-logo{width:42px}.brand-name{font-size:12px}.nav{gap:6px}}
+
+/* Phase 11: shareable office-directory filters */
+.office-share{min-height:44px;padding:10px 16px;border:1px solid #0b405a;border-radius:10px;background:#0b405a;color:#fff;font-weight:700}
+.office-share:hover{background:#09637b}
+.office-share-status{min-height:1.4em;margin:0 0 8px}
+@media(max-width:580px){.office-share{width:100%}}
