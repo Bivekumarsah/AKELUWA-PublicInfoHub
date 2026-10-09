@@ -64,10 +64,10 @@ test("PublicInfoHub logo and favicon assets are linked and present", async () =>
   const logo = await readFile(new URL("../assets/publicinfohub-logo.webp", import.meta.url));
   const favicon = await readFile(new URL("../assets/publicinfohub-favicon.webp", import.meta.url));
   assert.match(html, /class="brand-logo"/);
-  assert.match(html, /assets\\/publicinfohub-logo\\.webp/);
-  assert.match(html, /rel="icon" type="image\\/webp"/);
-  assert.match(html, /assets\\/publicinfohub-favicon\\.webp/);
-  assert.match(style, /\\.brand-logo/);
+  assert.ok(html.includes('assets/publicinfohub-logo.webp'));
+  assert.ok(html.includes('rel="icon" type="image/webp"'));
+  assert.ok(html.includes('assets/publicinfohub-favicon.webp'));
+  assert.ok(style.includes('.brand-logo'));
   assert.equal(logo.subarray(0, 4).toString(), "RIFF");
   assert.equal(logo.subarray(8, 12).toString(), "WEBP");
   assert.equal(favicon.subarray(0, 4).toString(), "RIFF");
