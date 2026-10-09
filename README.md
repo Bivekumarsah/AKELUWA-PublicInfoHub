@@ -99,6 +99,20 @@ Canonical directory filters still use unchanged English keys, and government off
 
 Manual QA before merge: toggle language both ways on desktop/mobile; open Passport details; try Nepali text in search; change office province and district filters *before and after switching*; test reset, modal accessibility and mobile menu; confirm all existing verified links and disclaimer remain present.
 
+## Phase 10: Search discovery and static performance
+
+- Sets a **single canonical URL** to the company-domain route: `https://www.akeluwasoftwarehub.com.np/publicinfohub/`. The standalone Vercel address serves the same page, with a canonical tag pointing to the company route to reduce duplicate indexing.
+- Adds descriptive page metadata, Open Graph and Twitter summary-card fields, and honest `WebSite` / `CollectionPage` JSON-LD without claiming government affiliation or inventing government services.
+- Adds a single-entry `sitemap.xml` for the real, indexable PublicInfoHub homepage. Provinces, districts and offices do **not** have separate URLs, so they are intentionally not listed as independent pages.
+- Adds a standalone-project `robots.txt` pointing to the canonical sitemap. The **company-domain root** `/robots.txt` remains controlled by the separate AKELUWA corporate repository; this change does not update that root file. Confirm that the company-domain reverse proxy serves `/publicinfohub/sitemap.xml` after deployment and submit that address to the company's verified Google Search Console property if desired.
+- Adds a one-hour static-asset cache with stale-while-revalidate on the standalone and prefixed routes; HTML caching is unchanged. CSS, scripts and brand asset filenames are currently stable, so avoid aggressive immutable caching.
+- Marks app scripts as `defer` in dependency order and gives the tiny header logo a high fetch priority.
+- Adds SEO regression tests plus syntax checks for bilingual and directory scripts in GitHub Actions.
+
+**Limitations:** Metadata and a sitemap help crawlers discover the page but do not guarantee Google indexing, ranking, rich results or measured speed improvements. Social previews use the existing compact WEBP brand image; some social crawlers may prefer a future dedicated PNG/JPEG share image. Full Core Web Vitals measurements and browser inspection should be performed after preview deployment.
+
+**Manual preview checklist:** verify homepage, favicon/logo, English/Nepali switch, district-to-office browsing and mobile navigation; inspect page metadata and `/publicinfohub/sitemap.xml` on the preview; after a production merge, confirm the company-domain sitemap and robots policy with a browser or Search Console.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
