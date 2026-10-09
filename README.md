@@ -135,6 +135,17 @@ The new section does not add records to the existing separately verified 28-offi
 
 **Manual review:** verify the header navigation and category card open the Lok Sewa section; test all/federal/provincial and province filters, official site and login links, switch English/Nepali, confirm no embedded login or payment form, and test small-screen presentation.
 
+## Phase 13 reference-photo banner handoff
+
+The premium homepage CSS now matches the approved photo-led Nepal layout with six category cards, seven province choices, a 77-district dropdown, Lok Sewa, office directory and mobile responsiveness. **The two user-supplied panorama photos are not in GitHub yet**: GitHub text-file editing cannot transfer their binary bytes. The CSS already references:
+
+- `assets/nepal-temple-banner.webp` (desktop panorama)
+- `assets/nepal-temple-banner-mobile.webp` (mobile panorama)
+
+To see the **exact supplied photographs** locally, obtain `AKELUWA_Phase13_Photo_Banners.zip` from the ChatGPT conversation and unzip the enclosed `assets/` folder into this repository root (alongside `index.html`). They were optimized as WebP (~151 KB and ~167 KB). Without them, the existing original `assets/nepal-heritage-hero.svg` displays as the fallback, so the site remains functional. To include the photos in the development PR, commit and push these assets to this feature branch only when approved.
+
+No image, page, emblem or website domain in the generated concept screenshot should be represented as a real government affiliation. Accurate information and actual source links take precedence over literal placeholder labels. The user's original brand logo remains unchanged.
+
 ## Phase 13 — Premium original UI and complete site footer
 
 This branch builds on Phase 12, retaining the original company-approved PublicInfoHub logo, all government directory records, the federal + provincial Lok Sewa application links, English/Nepali interface, province/district selectors, filters, and search.
