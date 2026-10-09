@@ -60,6 +60,29 @@ function render() {
   $("resultCount").textContent=matches.length+" sample service"+(matches.length===1?"":"s")+" • These are national references, not district-specific office listings.";
   renderRegions();
 }
+
+function renderOffices() {
+  const officeQuery = $("officeSearch").value.trim().toLocaleLowerCase();
+  const officeCategory = $("officeCategory").value;
+  const matches = GOVERNMENT_OFFICES.filter(office =>
+    (officeCategory === "All" || office.category === officeCategory) &&
+    (!officeQuery || [office.name, office.nameNe, office.category, office.city, office.province, office.district, office.description]
+      .join(" ").toLocaleLowerCase().includes(officeQuery))
+  );
+  $("officeCount").textContent = matches.length + " verified department homepage" + (matches.length === 1 ? "" : "s") + " found";
+  $("officeGrid").innerHTML = matches.length ? matches.map(office =>
+    '<article class="card office-card"><div class="office-meta"><span class="tag">' + escapeHtml(office.category) +
+    '</span><span class="verified-label">Official homepage checked</span></div><h3>' + escapeHtml(office.name) +
+    '</h3><p class="office-ne">' + escapeHtml(office.nameNe) +
+    '</p><p>' + escapeHtml(office.description) +
+    '</p><p><strong>Headquarters:</strong> ' + escapeHtml(office.city) +
+    '</p><p><strong>Last checked:</strong> ' + escapeHtml(office.checkedOn) +
+    '</p><a class="office-link" target="_blank" rel="noopener noreferrer" href="' + escapeHtml(office.website) +
+    '">Open official department website ↗</a><p class="office-source">Source: <a target="_blank" rel="noopener noreferrer" href="' +
+    escapeHtml(office.sourceUrl) + '">' + escapeHtml(new URL(office.sourceUrl).hostname) + '</a></p></article>'
+  ).join("") : '<p class="empty">No matching verified department homepages. Try another name or category.</p>';
+}
+
 let previousFocus=null;
 function showService(id) {
   const item=services.find(s=>s.id===id);
@@ -80,6 +103,9 @@ function showService(id) {
 function closeModal() {
   if(!$("modal").classList.contains("show"))return;
   $("modal").classList.remove("show");
+  $("officeSearch").addEventListener("input", renderOffices);
+  $("officeCategory").addEventListener("change", renderOffices);
+  renderOffices();
   $("modal").setAttribute("aria-hidden","true");
   if(previousFocus&&typeof previousFocus.focus==="function")previousFocus.focus();
 }
