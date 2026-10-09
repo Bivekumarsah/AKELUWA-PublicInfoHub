@@ -118,6 +118,34 @@ function initOfficeFilters() {
   districtSelect.addEventListener("change", renderOffices);
   provinceSelect.addEventListener("change", refreshDistrictOptions);
   refreshDistrictOptions();
+  // Populate only known, valid filters from a copied URL.
+  const restored=readOfficeLink(window.location.search,GOVERNMENT_OFFICES,NEPAL_REGIONS);
+  $("officeSearch").value=restored.search;
+  $("officeCategory").value=restored.category;
+  $("officeLevel").value=restored.level;
+  provinceSelect.value=restored.province;
+  refreshDistrictOptions();
+  districtSelect.value=restored.district;
+  renderOffices();
+
+  $("shareOfficeSearch").addEventListener("click", async () => {
+    const shareUrl=makeOfficeLink(window.location.href,{
+      search:$("officeSearch").value,
+      category:$("officeCategory").value,
+      province:provinceSelect.value,
+      district:districtSelect.value,
+      level:$("officeLevel").value
+    });
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("Clipboard not available");
+      await navigator.clipboard.writeText(shareUrl);
+      $("officeShareStatus").textContent=uiLanguage==="ne" ? "कार्यालय खोजको लिङ्क प्रतिलिपि गरियो।" : "Office search link copied. Share it to open these filters.";
+    } catch {
+      // Some browsers block clipboard access on untrusted origins.
+      window.prompt(uiLanguage==="ne" ? "यो लिङ्क प्रतिलिपि गर्नुहोस्:" : "Copy this office search link:",shareUrl);
+      $("officeShareStatus").textContent=uiLanguage==="ne" ? "लिङ्क प्रतिलिपि गर्न माथिको ठेगाना छान्नुहोस्।" : "Use the displayed URL to share this office search.";
+    }
+  });
 }
 
 function renderOffices() {
