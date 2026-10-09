@@ -206,6 +206,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     $("officeSummary").textContent=uiLanguage==="ne" ? uiDigits(GOVERNMENT_OFFICES.length)+" सूचीकृत सरकारी वेबसाइट ("+uiDigits(locals)+" स्थानीय तह, "+uiDigits(GOVERNMENT_OFFICES.length-locals)+" संघीय विभाग), "+uiDigits(coverage)+" प्रदेशमा। यो आंशिक निर्देशिका हो, पूर्ण राष्ट्रिय अभिलेख होइन।" : GOVERNMENT_OFFICES.length+" indexed government organization homepages ("+locals+" local governments, "+(GOVERNMENT_OFFICES.length-locals)+" federal departments) across "+coverage+" provinces. This is a partial directory, not a complete nationwide registry.";
     render();
     renderOffices();
+    translateLoksewa();
   });
   initOfficeFilters();
   $("modal").setAttribute("aria-hidden","true");
@@ -232,6 +233,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         $("officeSearch").focus({preventScroll:true});
         return;
       }
+      if(index===4){$("loksewa").scrollIntoView({behavior:"smooth"});return;}
       category=[ "All","Identity","Business","Transport" ][index];
       render();$("services").scrollIntoView({behavior:"smooth"});
     });
