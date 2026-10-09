@@ -135,6 +135,23 @@ The new section does not add records to the existing separately verified 28-offi
 
 **Manual review:** verify the header navigation and category card open the Lok Sewa section; test all/federal/provincial and province filters, official site and login links, switch English/Nepali, confirm no embedded login or payment form, and test small-screen presentation.
 
+## Phase 13 — Premium original UI and complete site footer
+
+This branch builds on Phase 12, retaining the original company-approved PublicInfoHub logo, all government directory records, the federal + provincial Lok Sewa application links, English/Nepali interface, province/district selectors, filters, and search.
+
+**Design:** Original civic-tech homepage styling (deep navy, teal accents, restrained premium cards, accessible focus states, mobile and tablet breakpoints, reduced-motion styling), clear hero search, popular starting points, government-directory navigation, geographic browsing and section labels. The visual concept is original; no third-party template or government identity has been copied. Any illustrated design references are **not** production assets. The product remains an independent information directory and makes no government affiliation claim.
+
+**Footer:** Product identity and accountable operator (AKELUWA Softwarehub), links to existing directories, in-page About/Privacy/Terms/Accessibility/Sources notices, safe official company contact route (no invented email address or phone), independent-directory disclaimer, automatically updated copyright year and back-to-top link. The legal-information text is a plain-language **starting point, not a compliance audit or legal opinion**; review it against actual deployment, analytics, cookies, and applicable Nepal law before release. Claims describe current static client behavior only.
+
+**Review locally:**
+```powershell
+git fetch origin
+git switch feature/phase13-premium-ui-footer
+git pull origin feature/phase13-premium-ui-footer
+npx serve -l 3000
+```
+Open http://localhost:3000 and test desktop/mobile, Nepali switching, category links, province/district selections, office filters, Lok Sewa login navigation, tab/keyboard focus, policy links and footer. Note: this feature branch is based on Phase 12, so merging should be coordinated with PR #11 first. Production, corporate site and Toolbox have not been modified.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
