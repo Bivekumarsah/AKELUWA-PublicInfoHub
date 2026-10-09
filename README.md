@@ -127,7 +127,7 @@ Adds a dedicated bilingual **Lok Sewa / लोक सेवा** section listing
 - Karnali: https://ppsc.karnali.gov.np/
 - Sudurpashchim: https://psc.sudurpashchim.gov.np/
 
-**Confirmed direct application / login portal links:** Koshi `https://psconline.koshi.gov.np/login`, Lumbini `https://ppsconline.lumbini.gov.np/login`, Karnali `https://ppsconline.karnali.gov.np/` and Sudurpashchim `https://ppsconline.sudurpashchim.gov.np/`. The other commissions link only to their verified websites, because no current direct login URL was independently confirmed.
+**Direct provincial application/login links:** Koshi `https://psconline.koshi.gov.np/login`, Madhesh `https://ppsconline.p2.gov.np/login`, Bagmati `https://ppsconline.bagamati.gov.np/login`, Gandaki `https://onlineppsc.gandaki.gov.np/login`, Lumbini `https://ppsconline.lumbini.gov.np/login`, Karnali `https://ppsconline.karnali.gov.np/` and Sudurpashchim `https://ppsconline.sudurpashchim.gov.np/`. The Madhesh link is documented in official application notices but a direct live page fetch timed out during this update; Bagmati and Gandaki presented online recruitment system login apps. The federal commission links to its verified homepage rather than an unconfirmed direct login URL.
 
 This is a **third-party directory**, not a government login page. It collects no passwords, applicant documents or payments. Each applicant must consult the specific official advertisement for qualification, deadline, payment, syllabus, exam centre, results and the recruiting authority. **Local government hiring does not have a universal Lok Sewa portal**: some positions are handled by provincial commissions and other positions by the responsible authority.
 
