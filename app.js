@@ -86,8 +86,8 @@ function initOfficeFilters() {
   const provinceSelect = $("officeProvince");
   const districtSelect = $("officeDistrict");
   const regionNames = NEPAL_REGIONS.map(region => region.name);
-  provinceSelect.innerHTML = '<option value="All">All provinces</option>' + regionNames.map(name =>
-    '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>'
+  provinceSelect.innerHTML = '<option value="All">'+uiText('All provinces')+'</option>' + regionNames.map(name =>
+    '<option value="' + escapeHtml(name) + '">' + escapeHtml(uiProvince(name)) + '</option>'
   ).join("");
   const refreshDistrictOptions = () => {
     const selectedProvince = provinceSelect.value;
@@ -95,7 +95,7 @@ function initOfficeFilters() {
     const districts = [...new Set(GOVERNMENT_OFFICES
       .filter(office => selectedProvince === "All" || office.province === selectedProvince)
       .map(office => office.district))].sort();
-    districtSelect.innerHTML = '<option value="All">All headquarters districts</option>' +
+    districtSelect.innerHTML = '<option value="All">'+uiText('All headquarters districts')+'</option>' +
       districts.map(name => '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>').join("");
     districtSelect.value = districts.includes(previous) ? previous : "All";
     renderOffices();
@@ -131,7 +131,7 @@ function renderOffices() {
     (officeProvince === "All" || office.province === officeProvince) &&
     (officeDistrict === "All" || office.district === officeDistrict) &&
     (officeLevel === "All" || office.level === officeLevel) &&
-    (!officeQuery || [office.name, office.nameNe, office.category, office.level, office.city, office.province, office.district, office.description]
+    (!officeQuery || [office.name, office.nameNe, office.category, uiText(office.category), office.level, office.city, office.province, uiProvince(office.province), office.district, office.description]
       .join(" ").toLocaleLowerCase().includes(officeQuery))
   );
   $("officeCount").textContent = uiLanguage === "ne" ? uiDigits(matches.length)+" जाँच गरिएका सरकारी वेबसाइट भेटिए" : matches.length + " checked government organization homepage" + (matches.length === 1 ? "" : "s") + " found";
@@ -154,12 +154,12 @@ function showService(id) {
   if(!item)return;
   previousFocus=document.activeElement;
   const detail=$("detail");
-  detail.innerHTML='<button type="button" class="close" id="closeDetail" aria-label="Close service details">✕</button>'+
-    '<div class="symbol">'+escapeHtml(item.icon)+'</div><span class="tag">'+escapeHtml(item.category)+'</span><h2 id="dialogTitle">'+escapeHtml(item.name)+'</h2>'+
-    '<p class="muted">'+escapeHtml(item.desc)+'</p><p><strong>Responsible organization:</strong> '+escapeHtml(item.agency)+'</p>'+
-    '<p><strong>Scope:</strong> '+escapeHtml(item.scope)+'</p><p><strong>Source:</strong> Department homepage; confirm current procedures on the official site.</p>'+
+  detail.innerHTML='<button type="button" class="close" id="closeDetail" aria-label="'+escapeHtml(uiText('Close service details'))+'">✕</button>'+
+    '<div class="symbol">'+escapeHtml(item.icon)+'</div><span class="tag">'+escapeHtml(uiText(item.category))+'</span><h2 id="dialogTitle">'+escapeHtml(uiText(item.name))+'</h2>'+
+    '<p class="muted">'+escapeHtml(uiText(item.desc))+'</p><p><strong>'+escapeHtml(uiText('Responsible organization:'))+'</strong> '+escapeHtml(uiText(item.agency))+'</p>'+
+    '<p><strong>'+escapeHtml(uiText('Scope:'))+'</strong> '+escapeHtml(uiText(item.scope))+'</p><p><strong>'+escapeHtml(uiText('Source:'))+'</strong> '+(uiLanguage === 'ne' ? 'सम्बन्धित विभागको वेबसाइट; वर्तमान प्रक्रिया आधिकारिक साइटमा पुष्टि गर्नुहोस्।' : 'Department homepage; confirm current procedures on the official site.')+'</p>'+
     '<p><a href="'+escapeHtml(item.url)+'" target="_blank" rel="noopener noreferrer">Open government website ↗</a></p>'+
-    '<p class="muted">Fees, requirements, deadlines and processing times are not verified here.</p>';
+    '<p class="muted">'+escapeHtml(uiText('Fees, requirements, deadlines and processing times are not verified here.'))+'</p>';
   $("modal").classList.add("show");
   $("modal").setAttribute("aria-hidden","false");
   $("closeDetail").addEventListener("click",closeModal);
@@ -194,9 +194,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   $("modal").setAttribute("aria-labelledby","dialogTitle");
   $("searchForm").addEventListener("submit",event=>{
     event.preventDefault();query=$("searchInput").value.trim().toLowerCase();render();
-    const districtMatches=NEPAL_REGIONS.some(region=>region.name.toLowerCase().includes(query)||region.districts.some(d=>d.toLowerCase().includes(query)));
+    const districtMatches=NEPAL_REGIONS.some(region=>[region.name,uiProvince(region.name)].some(n=>n.toLocaleLowerCase().includes(query))||region.districts.some(d=>d.toLocaleLowerCase().includes(query)));
     const serviceMatches=services.some(item=>searchText(item).includes(query));
-    const officeMatches=GOVERNMENT_OFFICES.some(item=>[item.name,item.nameNe,item.city,item.province,item.district,item.category].join(" ").toLocaleLowerCase().includes(query));
+    const officeMatches=GOVERNMENT_OFFICES.some(item=>[item.name,item.nameNe,item.city,item.province,uiProvince(item.province),item.district,item.category,uiText(item.category)].join(" ").toLocaleLowerCase().includes(query));
     if(officeMatches && !serviceMatches && !districtMatches) {
       $("officeSearch").value=$("searchInput").value.trim();
       renderOffices();
