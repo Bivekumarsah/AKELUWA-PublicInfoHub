@@ -62,6 +62,17 @@ Phase 6 adds seven local governments to the source-backed directory, bringing th
 
 The office index now reports the actual number of records and provides a reset control for government-office filters. It does not claim that these sites provide every service, fee, application requirement, or ward-level contact. The offices' listed headquarters district is **not** a service-availability filter.
 
+## Phase 7: Mobile navigation and search experience
+
+- Adds a keyboard-accessible mobile menu with proper expanded state, dismissal when a link is selected, outside-click dismissal and Escape support.
+- Adds a visible-on-focus **Skip to main content** link and clearly labeled search landmarks.
+- Homepage search now routes results to the most relevant service, district or government-office section; office-only searches also prefill the office-specific search.
+- The Government Offices category card now navigates to the real office directory, instead of presenting it as a sample service category.
+- Improves touch-target sizes, responsive office filter layout, service cards, reduced-motion behavior and focus visibility.
+- Does not change the 23 government office records, their verification scope or the existing government disclaimer.
+
+**Manual preview checks:** test header navigation on a small screen, close it with Escape and with a selected link, search for `passport`, `Kathmandu`, and `Biratnagar`, then confirm old category filters, province browsing, office search and modal controls still work.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
