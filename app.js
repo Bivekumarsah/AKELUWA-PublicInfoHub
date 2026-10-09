@@ -18,7 +18,7 @@ const renderButton = (label, type, active) =>
 
 function renderRegions() {
   $("provinces").innerHTML = NEPAL_REGIONS.map(region =>
-    '<button type="button" class="province'+(region.name===province?' active':'')+'" data-province="'+escapeHtml(region.name)+'" aria-pressed="'+(region.name===province)+'"><span>'+escapeHtml(uiProvince(region.name))+'</span><span>'+uiDigits(region.districts.length)+(uiLanguage==='ne'?' जिल्ला →':' districts →')</span></button>'
+    '<button type="button" class="province'+(region.name===province?' active':'')+'" data-province="'+escapeHtml(region.name)+'" aria-pressed="'+(region.name===province)+'"><span>'+escapeHtml(uiProvince(region.name))+'</span><span>'+uiDigits(region.districts.length)+(uiLanguage==='ne'?' जिल्ला →':' districts →')+'</span></button>'
   ).join("");
   const selected=regionFor(province);
   const visible=selected ? selected.districts.filter(name=>name.toLowerCase().includes(query)) :
