@@ -19,12 +19,12 @@ Download/clone the repo and open index.html in a browser, or run `python -m http
 - Run `node --test tests/*.test.mjs` to validate dataset counts and basic static delivery configuration.
 - PublicInfoHub is still independent from the Government of Nepal. The existing six services are general references only, and official sites must be checked for current procedures.
 
-## Next steps
+## Phase 3: First source-backed federal departments\nFive federal government department homepages were checked on 2026-10-09 and recorded in `offices.js`: Department of Passports, Inland Revenue Department, Office of Company Registrar, Department of Transport Management, and Department of National ID and Civil Registration. Each record contains its official source URL, a check date, a headquarters location, and a narrow `homepage-verified` status.\n\nVerification here means only that the homepage represented the listed government organization at review time. It does **not** certify current procedures, local service provision, fees, appointments, or contact details. All published office records are federal department headquarters in Kathmandu; the list does **not** enumerate province or district field offices.\n\nThe office section is independently searchable using the office name, Nepali name, category and location. Run `node --test tests/*.test.mjs` for tests. To add records, manually check the first-party government website and provide a new source URL and genuine review date. Do not invent field offices to populate geographic filters.\n\n## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
 ## Deploy under the existing company domain
 
-The standalone Vercel deployment supports both the root of its own deployment and the nested path `/publicinfohub/`. The new `vercel.json` rewrites nested paths to the existing `index.html`, `styles.css`, and `app.js`.
+The standalone Vercel deployment supports both the root of its own deployment and `/publicinfohub/`. `vercel.json` rewrites nested paths to static files such as `index.html`, `styles.css`, `data.js`, `offices.js`, and `app.js`.
 
 1. Import this repository into Vercel as a separate project. Choose **Other** for Framework Preset, and leave the build command empty. Ensure the output directory is the repository root (do not select a subdirectory).
 2. Confirm these URLs work on the PublicInfoHub Vercel deployment:
