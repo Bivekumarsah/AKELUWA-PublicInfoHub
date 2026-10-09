@@ -33,10 +33,17 @@ function renderRegions() {
   $("districts").innerHTML=(selected ? visible.map(name=>({name,region:province})):visible).map(item=>
     '<button type="button" class="district'+(item.name===district&&item.region===province?' active':'')+'" data-district="'+escapeHtml(item.name)+'" data-region="'+escapeHtml(item.region)+'" aria-pressed="'+(item.name===district&&item.region===province)+'">'+escapeHtml(item.name)+(selected?'':' <small>'+escapeHtml(item.region)+'</small>')+'</button>'
   ).join("");
-  const label=district ? district+", "+province+": local office listings are being verified. Please use the responsible government website for current services." :
-    selected ? "District names only — local government offices and application procedures have not been verified yet." :
+  const localOffices = GOVERNMENT_OFFICES.filter(office => office.level === "Local" && office.province === province && office.district === district);
+  const label = district ?
+    (localOffices.length ? district + ", " + province + ": " + localOffices.length + " checked local government homepage" + (localOffices.length === 1 ? "" : "s") + " available in our partial directory. Service availability is not verified." :
+      district + ", " + province + ": no local government homepages indexed yet. This does not mean there are no government offices in this district.") :
+    selected ? "Select a district to find checked local government homepages, where available. Coverage is partial." :
     query && !visible.length ? "No matching districts. Try another search term." : "";
   $("districtMessage").textContent=label;
+  const districtOfficeAction = $("districtOfficeAction");
+  districtOfficeAction.hidden = !district || localOffices.length === 0;
+  districtOfficeAction.textContent = district && localOffices.length ?
+    "View " + localOffices.length + " listed local government office" + (localOffices.length === 1 ? "" : "s") + " in " + district + " →" : "";
   document.querySelectorAll("[data-province]").forEach(btn=>btn.addEventListener("click",()=>{
     province=province===btn.dataset.province?"":btn.dataset.province;district="";render();
   }));
@@ -45,6 +52,20 @@ function renderRegions() {
     district=district===btn.dataset.district?"":btn.dataset.district;
     render();
   }));
+}
+function openSelectedDistrictOffices() {
+  if (!province || !district) return;
+  const matching = GOVERNMENT_OFFICES.some(office => office.level === "Local" && office.province === province && office.district === district);
+  if (!matching) return;
+  $("officeSearch").value = "";
+  $("officeCategory").value = "All";
+  $("officeLevel").value = "Local";
+  $("officeProvince").value = province;
+  $("officeProvince").dispatchEvent(new Event("change"));
+  $("officeDistrict").value = district;
+  renderOffices();
+  $("offices").scrollIntoView({behavior:"smooth"});
+  $("officeDistrict").focus({preventScroll:true});
 }
 function render() {
   const cats=["All",...new Set(services.map(s=>s.category))];
@@ -151,6 +172,7 @@ function closeModal() {
   if(previousFocus&&typeof previousFocus.focus==="function")previousFocus.focus();
 }
 document.addEventListener("DOMContentLoaded",()=>{
+  $("districtOfficeAction").addEventListener("click", openSelectedDistrictOffices);
   const menuToggle = $("menuToggle");
   const primaryNav = $("primaryNav");
   function closeMenu() {
