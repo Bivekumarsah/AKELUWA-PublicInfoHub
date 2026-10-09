@@ -18,7 +18,7 @@ const renderButton = (label, type, active) =>
 
 function renderRegions() {
   $("provinces").innerHTML = NEPAL_REGIONS.map(region =>
-    '<button type="button" class="province'+(region.name===province?' active':'')+'" data-province="'+escapeHtml(region.name)+'" aria-pressed="'+(region.name===province)+'"><span>'+escapeHtml(uiProvince(region.name))+'</span><span>'+uiDigits(region.districts.length)+(uiLanguage==='ne'?' जिल्ला →':' districts →')+'</span></button>'
+    '<button type="button" class="province'+(region.name===province?' active':'')+'" data-province="'+escapeHtml(region.name)+'" aria-pressed="'+(region.name===province)+'"><span class="province-icon" aria-hidden="true">'+(NEPAL_REGIONS.indexOf(region)+1)+'</span><span class="province-title">'+escapeHtml(uiProvince(region.name))+'</span><span class="province-count">'+uiDigits(region.districts.length)+(uiLanguage==='ne'?' जिल्ला →':' districts →')+'</span></button>'
   ).join("");
   const selected=regionFor(province);
   const visible=selected ? selected.districts.filter(name=>name.toLowerCase().includes(query)) :
@@ -235,6 +235,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         return;
       }
       if(index===4){$("loksewa").scrollIntoView({behavior:"smooth"});return;}
+      if(index===5){$("provinces-section").scrollIntoView({behavior:"smooth"});return;}
       category=[ "All","Identity","Business","Transport" ][index];
       render();$("services").scrollIntoView({behavior:"smooth"});
     });
