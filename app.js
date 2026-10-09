@@ -79,6 +79,18 @@ function initOfficeFilters() {
     districtSelect.value = districts.includes(previous) ? previous : "All";
     renderOffices();
   };
+  const localCount = GOVERNMENT_OFFICES.filter(office => office.level === "Local").length;
+  const coverageCount = new Set(GOVERNMENT_OFFICES.filter(office => office.level === "Local").map(office => office.province)).size;
+  $("officeSummary").textContent = GOVERNMENT_OFFICES.length + " indexed government organization homepages (" + localCount + " local governments, " + (GOVERNMENT_OFFICES.length - localCount) + " federal departments) across " + coverageCount + " provinces. This is a partial directory, not a complete nationwide registry.";
+  $("resetOfficeFilters").addEventListener("click", () => {
+    $("officeSearch").value = "";
+    $("officeCategory").value = "All";
+    $("officeLevel").value = "All";
+    provinceSelect.value = "All";
+    districtSelect.value = "All";
+    refreshDistrictOptions();
+    $("officeSearch").focus();
+  });
   $("officeSearch").addEventListener("input", renderOffices);
   $("officeCategory").addEventListener("change", renderOffices);
   $("officeLevel").addEventListener("change", renderOffices);
@@ -112,7 +124,7 @@ function renderOffices() {
     '</p><a class="office-link" target="_blank" rel="noopener noreferrer" href="' + escapeHtml(office.website) +
     '">Open official government website ↗</a><p class="office-source">Source: <a target="_blank" rel="noopener noreferrer" href="' +
     escapeHtml(office.sourceUrl) + '">' + escapeHtml(new URL(office.sourceUrl).hostname) + '</a></p></article>'
-  ).join("") : '<p class="empty">No matching verified department homepages. Try another name or category.</p>';
+  ).join("") : '<p class="empty">No matching organization homepages. Try resetting the office filters.</p>';
 }
 
 let previousFocus=null;
