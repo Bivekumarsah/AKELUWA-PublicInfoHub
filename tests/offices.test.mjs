@@ -53,7 +53,7 @@ test("office records are wired into the nested deployment", async () => {
   assert.ok(app.includes('office.district === officeDistrict'));
   assert.ok(app.includes('office.level === officeLevel'));
   assert.ok(app.includes("renderOffices()"));
-  assert.ok(app.includes("escapeHtml(office.name)"));
+  assert.ok(app.includes("escapeHtml(uiOfficeName(office))"));
   assert.ok(app.includes("escapeHtml(office.website)"));
   assert.ok(html.indexOf('src="offices.js"') < html.indexOf('src="app.js"'));
 });
