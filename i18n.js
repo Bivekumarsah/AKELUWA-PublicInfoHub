@@ -95,6 +95,8 @@ function translateStaticUi() {
   document.querySelector("#officeSearch").placeholder = uiLanguage === "ne" ? "कार्यालय, नेपाली नाम, वर्ग वा स्थान खोज्नुहोस्" : "Search office, नेपाली नाम, category or location";
   document.querySelector("#officeSearch").setAttribute("aria-label",uiLanguage === "ne" ? "सरकारी कार्यालय वेबसाइट खोज्नुहोस्" : "Search verified office homepages");
   document.querySelector("#langSwitch").textContent=uiLanguage === "ne" ? "English" : "नेपाली";
+  document.querySelector("#langSwitch").lang=uiLanguage === "ne" ? "en" : "ne";
+  document.querySelector("#menuToggle").setAttribute("aria-label",uiLanguage === "ne" ? "नेभिगेसन मेनु खोल्नुहोस्" : "Open navigation menu");
   document.querySelector("#langSwitch").setAttribute("aria-label",uiLanguage === "ne" ? "Switch to English" : "नेपाली भाषामा परिवर्तन गर्नुहोस्");
   const labels={officeCategory:"Filter offices by category",officeProvince:"Filter offices by province",officeDistrict:"Filter office headquarters by district",officeLevel:"Filter offices by government level"};
   const nepali={officeCategory:"वर्गअनुसार फिल्टर",officeProvince:"प्रदेशअनुसार फिल्टर",officeDistrict:"जिल्लाअनुसार फिल्टर",officeLevel:"सरकारको तहअनुसार फिल्टर"};
