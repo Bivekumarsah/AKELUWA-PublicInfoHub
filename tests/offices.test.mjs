@@ -73,3 +73,23 @@ test("PublicInfoHub logo and favicon assets are linked and present", async () =>
   assert.equal(favicon.subarray(0, 4).toString(), "RIFF");
   assert.equal(favicon.subarray(8, 12).toString(), "WEBP");
 });
+
+test("Phase 7 navigation and directory search work with accessible markup", async () => {
+  const html = await source("index.html");
+  const script = await source("app.js");
+  const css = await source("styles.css");
+  assert.ok(html.includes('class="skip-link" href="#mainContent"'));
+  assert.ok(html.includes('id="menuToggle"'));
+  assert.ok(html.includes('aria-controls="primaryNav"'));
+  assert.ok(html.includes('id="primaryNav"'));
+  assert.ok(html.includes('id="mainContent"'));
+  assert.ok(html.includes('role="search"'));
+  assert.ok(html.includes('href="#offices"'));
+  assert.ok(script.includes('menuToggle.addEventListener("click"'));
+  assert.ok(script.includes('link.addEventListener("click", closeMenu)'));
+  assert.ok(script.includes('const officeMatches=GOVERNMENT_OFFICES.some'));
+  assert.ok(script.includes('if (index === 0)'));
+  assert.ok(css.includes('.links.open{display:flex}'));
+  assert.ok(css.includes('.skip-link:focus'));
+  assert.ok(css.includes('prefers-reduced-motion:reduce'));
+});
