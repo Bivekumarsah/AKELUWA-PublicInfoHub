@@ -32,7 +32,7 @@ const UI_WORDS = {
     "Identity & Documents":"पहिचान र कागजात","Citizenship, passport, national ID":"नागरिकता, राहदानी, राष्ट्रिय परिचयपत्र",
     "Business & Tax":"व्यवसाय र कर","PAN, company registration, VAT":"प्यान, कम्पनी दर्ता, भ्याट",
     "Transport":"यातायात","Driving licences, vehicle registration":"चालक अनुमतिपत्र, सवारी दर्ता",
-    "Government Offices":"सरकारी कार्यालय","Ministries, departments, local bodies":"मन्त्रालय, विभाग, स्थानीय तह",
+    "Government Offices":"सरकारी कार्यालयहरू","Ministries, departments, local bodies":"मन्त्रालय, विभाग, स्थानीय तह",
     "Federal and provincial commissions":"संघीय तथा प्रदेश लोक सेवा आयोग",
     "Municipalities and districts":"नगरपालिका र जिल्लाहरू",
     "Explore Services by Province":"प्रदेशअनुसार सेवा खोज्नुहोस्","Choose a province to browse its districts and indexed offices.":"जिल्ला र सूचीकृत कार्यालय हेर्न प्रदेश छान्नुहोस्।",
