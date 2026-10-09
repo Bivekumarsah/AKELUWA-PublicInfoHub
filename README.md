@@ -135,6 +135,36 @@ The new section does not add records to the existing separately verified 28-offi
 
 **Manual review:** verify the header navigation and category card open the Lok Sewa section; test all/federal/provincial and province filters, official site and login links, switch English/Nepali, confirm no embedded login or payment form, and test small-screen presentation.
 
+## Phase 13 reference-photo banner handoff
+
+The premium homepage CSS now matches the approved photo-led Nepal layout with six category cards, seven province choices, a 77-district dropdown, Lok Sewa, office directory and mobile responsiveness. **The two user-supplied panorama photos are not in GitHub yet**: GitHub text-file editing cannot transfer their binary bytes. The CSS already references:
+
+- `assets/nepal-temple-banner.webp` (desktop panorama)
+- `assets/nepal-temple-banner-mobile.webp` (mobile panorama)
+
+To see the **exact supplied photographs** locally, obtain `AKELUWA_Phase13_Photo_Banners.zip` from the ChatGPT conversation and unzip the enclosed `assets/` folder into this repository root (alongside `index.html`). They were optimized as WebP (~151 KB and ~167 KB). Without them, the existing original `assets/nepal-heritage-hero.svg` displays as the fallback, so the site remains functional. To include the photos in the development PR, commit and push these assets to this feature branch only when approved.
+
+No image, page, emblem or website domain in the generated concept screenshot should be represented as a real government affiliation. Accurate information and actual source links take precedence over literal placeholder labels. The user's original brand logo remains unchanged.
+
+## Phase 13 — Premium original UI and complete site footer
+
+This branch builds on Phase 12, retaining the original company-approved PublicInfoHub logo, all government directory records, the federal + provincial Lok Sewa application links, English/Nepali interface, province/district selectors, filters, and search.
+
+**Nepal heritage visual update:** Hero now includes original responsive `assets/nepal-heritage-hero.svg` illustrating Himalayan peaks and a traditional pagoda, with dark overlays for legible headings and search controls. This is custom vector illustration rather than a photograph or a reproduction of any specific protected historical image. Six distinctive category treatments now include Local Services; seven province-selection cards have ordinal number badges and accurate labels/district counts rather than speculative geographic outlines. All directory interactions and English/Nepali translations are preserved. No live remote image loading required.
+
+**Design:** Original civic-tech homepage styling (deep navy, teal accents, restrained premium cards, accessible focus states, mobile and tablet breakpoints, reduced-motion styling), clear hero search, popular starting points, government-directory navigation, geographic browsing and section labels. The visual concept is original; no third-party template or government identity has been copied. Any illustrated design references are **not** production assets. The product remains an independent information directory and makes no government affiliation claim.
+
+**Footer:** Product identity and accountable operator (AKELUWA Softwarehub), links to existing directories, in-page About/Privacy/Terms/Accessibility/Sources notices, safe official company contact route (no invented email address or phone), independent-directory disclaimer, automatically updated copyright year and back-to-top link. The legal-information text is a plain-language **starting point, not a compliance audit or legal opinion**; review it against actual deployment, analytics, cookies, and applicable Nepal law before release. Claims describe current static client behavior only.
+
+**Review locally:**
+```powershell
+git fetch origin
+git switch feature/phase13-premium-ui-footer
+git pull origin feature/phase13-premium-ui-footer
+npx serve -l 3000
+```
+Open http://localhost:3000 and test desktop/mobile, Nepali switching, category links, province/district selections, office filters, Lok Sewa login navigation, tab/keyboard focus, policy links and footer. Note: this feature branch is based on Phase 12, so merging should be coordinated with PR #11 first. Production, corporate site and Toolbox have not been modified.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
