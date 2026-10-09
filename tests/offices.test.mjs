@@ -7,7 +7,7 @@ const source = name => readFile(new URL("../" + name, import.meta.url), "utf8");
 
 test("all published offices have unique IDs, homepage sources and check dates", async () => {
   const offices = vm.runInNewContext((await source("offices.js")) + "\nGOVERNMENT_OFFICES");
-  assert.equal(offices.length, 23);
+  assert.equal(offices.length, 28);
   assert.equal(new Set(offices.map(record => record.id)).size, offices.length);
   for (const record of offices) {
     assert.ok(["Federal","Local"].includes(record.level));
@@ -23,7 +23,7 @@ test("all published offices have unique IDs, homepage sources and check dates", 
     assert.equal(cited.hostname.replace("www.", ""), official.hostname.replace("www.", ""));
     assert.ok(official.hostname.endsWith(".gov.np"));
   }
-  assert.equal(offices.filter(office => office.level === "Local").length, 16);
+  assert.equal(offices.filter(office => office.level === "Local").length, 21);
   assert.equal(offices.filter(office => office.level === "Federal").length, 7);
   assert.equal(new Set(offices.filter(office => office.level === "Local").map(office => office.province)).size, 7);
   assert.ok(new Set(offices.filter(office => office.level === "Local").map(office => office.district)).size >= 13);
@@ -92,4 +92,39 @@ test("Phase 7 navigation and directory search work with accessible markup", asyn
   assert.ok(css.includes('.links.open{display:flex}'));
   assert.ok(css.includes('.skip-link:focus'));
   assert.ok(css.includes('prefers-reduced-motion:reduce'));
+});
+
+test("Phase 8 includes five newly checked local-government homepages", async () => {
+  const offices = vm.runInNewContext((await source("offices.js")) + "\nGOVERNMENT_OFFICES");
+  const additions = [
+    ["dharan-submetro", "Koshi", "Sunsari", "dharan.gov.np"],
+    ["damak-municipality", "Koshi", "Jhapa", "damakmun.gov.np"],
+    ["dhulikhel-municipality", "Bagmati", "Kavrepalanchok", "dhulikhelmun.gov.np"],
+    ["banepa-municipality", "Bagmati", "Kavrepalanchok", "banepamun.gov.np"],
+    ["nepalgunj-submetro", "Lumbini", "Banke", "nepalgunjmun.gov.np"]
+  ];
+  for (const [id, province, district, hostname] of additions) {
+    const record = offices.find(office => office.id === id);
+    assert.ok(record, "missing checked office " + id);
+    assert.equal(record.level, "Local");
+    assert.equal(record.province, province);
+    assert.equal(record.district, district);
+    assert.equal(new URL(record.website).hostname, hostname);
+    assert.equal(new URL(record.sourceUrl).hostname.replace("www.", ""), hostname);
+  }
+});
+
+test("Phase 8 district browsing links only to indexed local-government offices", async () => {
+  const html = await source("index.html");
+  const app = await source("app.js");
+  const style = await source("styles.css");
+  assert.ok(html.includes('id="districtOfficeAction" hidden'));
+  assert.ok(html.includes("Not every district has an indexed office."));
+  assert.ok(app.includes('office.level === "Local" && office.province === province && office.district === district'));
+  assert.ok(app.includes('districtOfficeAction.hidden = !district || localOffices.length === 0'));
+  assert.ok(app.includes('function openSelectedDistrictOffices()'));
+  assert.ok(app.includes('$("officeLevel").value = "Local";'));
+  assert.ok(app.includes('$("officeProvince").dispatchEvent(new Event("change"))'));
+  assert.ok(app.includes('$("officeDistrict").value = district;'));
+  assert.ok(style.includes('.district-office-action[hidden]{display:none!important}'));
 });
