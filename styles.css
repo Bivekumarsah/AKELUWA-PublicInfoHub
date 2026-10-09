@@ -90,3 +90,9 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
   .brand-logo{width:52px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Phase 8: Discover checked local-government websites from the district index. */
+.district-office-action{display:inline-flex;align-items:center;justify-content:center;margin:14px 0 5px;min-height:44px}
+.district-office-action[hidden]{display:none!important}
+.district-office-action:hover{background:#09637b}
+@media(max-width:580px){.district-office-action{width:100%;text-align:center}}
