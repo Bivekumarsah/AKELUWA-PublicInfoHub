@@ -148,7 +148,7 @@ function translateStaticUi() {
     const el = document.querySelector(selector);
     if(!el) continue;
     if(selector === ".hero h1"){el.innerHTML = uiLanguage === "ne" ? ne : "Public services, offices, and<br><span>official links — in one trusted place.</span>";continue;}
-    if(preserveStrong){const strong=el.querySelector("strong");const icon=el.querySelector(".stat-icon");if(strong)el.replaceChildren(...(icon?[icon]:[]),strong,document.createTextNode(uiLanguage === "ne" ? " "+uiText(en) : en));continue;}
+    if(preserveStrong){const strong=el.querySelector("strong");const icon=el.querySelector(".stat-icon");const subtitle=el.querySelector("small");if(strong)el.replaceChildren(...(icon?[icon]:[]),strong,document.createTextNode(uiLanguage === "ne" ? " "+uiText(en) : en),...(subtitle?[subtitle]:[]));continue;}
     el.textContent = uiLanguage === "ne" && ne ? ne : uiText(en);
   }
   document.querySelectorAll("#primaryNav a").forEach((a,i)=>{a.textContent=uiText(["Categories","Provinces","Services","Offices","Lok Sewa","About"][i]);});
