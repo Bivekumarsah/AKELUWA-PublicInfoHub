@@ -91,6 +91,14 @@ The provinces/districts section now explains how many **listed local-government 
 
 Preview checks before merging: select Bagmati → Kavrepalanchok (2 listed offices), Koshi → Sunsari (2 listed offices), Lumbini → Banke (1 listed office), and a district without indexed offices (no action). Verify reset controls, independent office filters, logo/favicon and mobile layout. This release does not change the main company repository or Toolbox.
 
+## Phase 9: English and Nepali interface
+
+A visible `नेपाली / English` toggle updates the interface language **without refreshing the page**. The header, navigation, search instructions, category cards, province names, district counts, office filters, result summaries, sample service cards, dialogs, and independence/verification disclaimer have Nepali UI strings. `<html lang>` and accessible form names update on switch.
+
+Canonical directory filters still use unchanged English keys, and government offices retain their source-provided English and Nepali names, original government links and 2026-10-09 homepage-check records. This is a **first-pass interface translation**, not a legal/official translation of government application procedures. District names, some office addresses and underlying source-provided data can remain in English; government instructions must be checked on the official sites.
+
+Manual QA before merge: toggle language both ways on desktop/mobile; open Passport details; try Nepali text in search; change office province and district filters *before and after switching*; test reset, modal accessibility and mobile menu; confirm all existing verified links and disclaimer remain present.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
