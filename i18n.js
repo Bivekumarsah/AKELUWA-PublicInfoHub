@@ -2,7 +2,7 @@
 const UI_LANGUAGES = Object.freeze(["en", "ne"]);
 const UI_WORDS = {
   ne: {
-    "Categories":"वर्गहरू","Provinces":"प्रदेशहरू","Services":"सेवाहरू","Offices":"कार्यालयहरू","About":"हाम्रो बारेमा",
+    "Lok Sewa":"लोक सेवा","Categories":"वर्गहरू","Provinces":"प्रदेशहरू","Services":"सेवाहरू","Offices":"कार्यालयहरू","About":"हाम्रो बारेमा",
     "Explore services ↗":"सेवाहरू हेर्नुहोस् ↗","Menu":"मेनु","Independent public information directory • Nepal":"स्वतन्त्र सार्वजनिक सूचना निर्देशिका • नेपाल",
     "Public services.":"सार्वजनिक सेवाहरू.","One place to start.":"सुरु गर्ने एउटै ठाउँ.",
     "Explore Nepal government departments, service information, and official website links through a simple, accessible directory built by AKELUWA Softwarehub.":"AKELUWA Softwarehub को सरल निर्देशिकाबाट नेपालका सरकारी विभाग, सेवा जानकारी र आधिकारिक वेबसाइटका लिङ्क खोज्नुहोस्।",
@@ -66,6 +66,8 @@ const UI_STATIC = [
   ["#categories .card:nth-child(3) p","Company and PAN services"],
   ["#categories .card:nth-child(4) h3","Transport Services"],
   ["#categories .card:nth-child(4) p","Licensing and transport"],
+  ["#categories .card:nth-child(5) h3","Lok Sewa"],
+  ["#categories .card:nth-child(5) p","Recruitment and official applications","भर्ना र आधिकारिक आवेदन"],
   ["#provinces-section h2","Explore Nepal's provinces"],
   ["#provinces-section .heading p","Choose a province and district to browse our partial directory of checked local-government websites. Not every district has an indexed office."],
   ["#services h2","Discover public services"],
@@ -87,7 +89,7 @@ function translateStaticUi() {
     if(preserveStrong){const strong=el.querySelector("strong");el.replaceChildren(strong,document.createTextNode(uiLanguage === "ne" ? " "+uiText(en) : en));continue;}
     el.textContent = uiLanguage === "ne" && ne ? ne : uiText(en);
   }
-  document.querySelectorAll("#primaryNav a").forEach((a,i)=>{a.textContent=uiText(["Categories","Provinces","Services","Offices","About"][i]);});
+  document.querySelectorAll("#primaryNav a").forEach((a,i)=>{a.textContent=uiText(["Categories","Provinces","Services","Offices","Lok Sewa","About"][i]);});
   const pill=document.querySelector(".nav > .pill"); if(pill) pill.textContent=uiText("Explore services ↗");
   const menu=document.querySelector("#menuToggle span"); if(menu) menu.textContent=uiText("Menu");
   document.querySelector("#searchInput").placeholder = uiLanguage === "ne" ? "राहदानी, PAN, चालक अनुमतिपत्र, काठमाडौँ..." : "Try passport, PAN, driving license, Kathmandu...";
