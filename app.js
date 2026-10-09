@@ -173,6 +173,18 @@ function closeModal() {
 }
 document.addEventListener("DOMContentLoaded",()=>{
   const footerYear=$("footerYear");if(footerYear)footerYear.textContent=String(new Date().getFullYear());
+  const quickDistrict=$("quickDistrict");
+  if(quickDistrict){
+    quickDistrict.innerHTML='<option value="">Select your district</option>'+NEPAL_REGIONS.flatMap(region=>region.districts.map(name=>'<option value="'+escapeHtml(region.name+'|'+name)+'">'+escapeHtml(name+' · '+region.name)+'</option>')).join("");
+    quickDistrict.addEventListener("change",()=>{
+      if(!quickDistrict.value)return;
+      const [name,place]=quickDistrict.value.split("|");
+      province=name;district=place;query="";$("searchInput").value="";
+      render();
+      $("districtMessage").scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  }
+
   $("districtOfficeAction").addEventListener("click", openSelectedDistrictOffices);
   const menuToggle = $("menuToggle");
   const primaryNav = $("primaryNav");
@@ -208,6 +220,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     render();
     renderOffices();
     translateLoksewa();
+    if(quickDistrict){
+      quickDistrict.options[0].textContent=uiLanguage==="ne"?"आफ्नो जिल्ला छान्नुहोस्":"Select your district";
+      [...quickDistrict.options].slice(1).forEach(option=>{const [name,place]=option.value.split("|");option.textContent=place+" · "+uiProvince(name);});
+    }
   });
   initOfficeFilters();
   $("modal").setAttribute("aria-hidden","true");
@@ -229,14 +245,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.querySelectorAll("#categories .card").forEach((card,index)=>{
     card.addEventListener("click",event=>{
       event.preventDefault();
-      if (index === 0) {
-        $("offices").scrollIntoView({behavior:"smooth"});
-        $("officeSearch").focus({preventScroll:true});
-        return;
-      }
+      if(index===3){$("offices").scrollIntoView({behavior:"smooth"});$("officeSearch").focus({preventScroll:true});return;}
       if(index===4){$("loksewa").scrollIntoView({behavior:"smooth"});return;}
       if(index===5){$("provinces-section").scrollIntoView({behavior:"smooth"});return;}
-      category=[ "All","Identity","Business","Transport" ][index];
+      category=["Identity","Business","Transport"][index];
       render();$("services").scrollIntoView({behavior:"smooth"});
     });
   });
