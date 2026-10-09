@@ -19,3 +19,5 @@ jobs:
         run: |
           node --check data.js
           node --check app.js
+          node --check offices.js
+          node --check i18n.js
