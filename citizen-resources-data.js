@@ -22,3 +22,8 @@ const CITIZEN_GUIDES=Object.freeze([
  {id:"nid",name:"National ID",ne:"राष्ट्रिय परिचयपत्र",level:"Federal / designated centres",levelNe:"संघीय / तोकिएका केन्द्र",desc:"Follow National ID and Civil Registration department instructions for enrolment and any required in-person biometrics.",descNe:"दर्ता तथा आवश्यक बायोमेट्रिक प्रक्रियाका लागि राष्ट्रिय परिचयपत्र तथा पञ्जीकरण विभागका निर्देशन हेर्नुहोस्।",url:"https://donidcr.gov.np/"},
  {id:"driving",name:"Driving licence",ne:"सवारी चालक अनुमतिपत्र",level:"Provincial / transport",levelNe:"प्रदेश / यातायात",desc:"Applications, trials and visits may depend on province. Consult the responsible transport authority and official notices.",descNe:"आवेदन, ट्रायल र कार्यालय जानुपर्ने प्रक्रिया प्रदेशअनुसार फरक हुन सक्छ। सम्बन्धित यातायात निकायको सूचना हेर्नुहोस्।",url:"https://dotm.gov.np/"}
 ]);
+
+const OFFICIAL_MEDIA_LINKS=Object.freeze([
+ {name:"Gorkhapatra",ne:"गोरखापत्र",url:"https://gorkhapatraonline.com/",description:"Public-service newspaper website",descriptionNe:"सार्वजनिक सेवा समाचारपत्रको वेबसाइट"},
+ {name:"Radio Nepal",ne:"रेडियो नेपाल",url:"https://radionepal.gov.np/",description:"Public-service radio broadcaster",descriptionNe:"सार्वजनिक सेवा रेडियो प्रसारण"}
+]);
