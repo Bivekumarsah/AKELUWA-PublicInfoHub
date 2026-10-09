@@ -238,3 +238,70 @@ body{background:#f8fbfd}
 .province.active .province-icon{color:white;background:#0b708a}
 @media(max-width:850px){.heritage-caption{display:none}.hero{background-position:63% center}.grid.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:580px){.hero{background-image:linear-gradient(95deg,rgba(6,31,53,.94) 0%,rgba(7,37,60,.88) 74%,rgba(7,36,53,.67)),url("assets/nepal-heritage-hero.svg");background-position:62% center}.category-grid .card{min-height:193px;padding:17px 14px}.province{column-gap:8px;grid-template-columns:35px minmax(0,1fr)}.province .province-icon{width:35px;height:35px;font-size:16px}.province .province-count{font-size:11px}}
+
+/* Phase 13 photo-reference fidelity. Optimized user image can be placed at assets/nepal-temple-banner.webp. */
+.hero{padding:48px 0 0;background-image:linear-gradient(90deg,rgba(4,32,61,.92) 0%,rgba(6,46,79,.78) 34%,rgba(5,48,75,.35) 63%,rgba(4,33,53,.04) 100%),url("assets/nepal-temple-banner.webp"),url("assets/nepal-heritage-hero.svg");background-size:cover,cover,cover;background-position:center center}
+.hero>.wrap{max-width:1250px}
+.hero-badge{font-size:11px;margin-bottom:16px;padding:5px 11px;background:rgba(7,43,69,.68)}
+.hero .eyebrow{font-size:11px;letter-spacing:2.1px;font-weight:800;color:#d1edf4}
+.hero h1{max-width:830px;font-size:clamp(33px,3.9vw,55px);letter-spacing:-1.6px;line-height:1.1;margin:13px 0}
+.hero h1 span{color:#fff}
+.hero p{max-width:640px;font-size:15px;line-height:1.65;margin-bottom:0}
+.hero .search{max-width:720px;margin-top:20px}
+.hero .popular-searches{margin-top:10px;max-width:830px}
+.hero .stats{margin-top:39px}
+.heritage-caption{display:none}
+.stats{border-radius:0;margin-inline:-24px;box-shadow:0 8px 18px rgba(8,34,49,.08)}
+.stats>div{min-height:84px;padding-top:18px;padding-bottom:15px}
+.stats>div strong{font-size:26px}
+.stats small{display:block;color:#70879b;font-size:11px;margin-top:2px}
+.section{padding:40px 0}
+.section-kicker{font-size:10px;letter-spacing:1.4px;margin-bottom:5px}
+.heading{margin-bottom:14px}
+.heading h2{font-size:clamp(22px,2.3vw,29px);margin-bottom:4px}
+.grid.category-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.category-grid .card{min-width:0;min-height:158px;padding:17px 14px;border:0;box-shadow:0 4px 16px #143e6010;border-radius:12px}
+.category-grid .card h3{font-size:14px;color:#102c55;margin-bottom:5px}
+.category-grid .card p{font-size:12px;line-height:1.45;color:#566878}
+.category-grid .card::after{bottom:10px;right:11px}
+.category-grid .symbol{height:44px;width:44px;border-radius:50%;font-size:23px;margin-bottom:15px}
+.category-grid .card:nth-child(1){background:#eaf5fe}
+.category-grid .card:nth-child(2){background:#e9fbf5}
+.category-grid .card:nth-child(3){background:#fff8eb}
+.category-grid .card:nth-child(4){background:#f5f0ff}
+.category-grid .card:nth-child(5){background:#fff0f1}
+.category-grid .card:nth-child(6){background:#e8f9f5}
+.discovery-layout{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(240px,1fr);gap:13px;align-items:stretch}
+.province-panel,.district-finder{background:#eef7fd;border:1px solid #e3eef6;border-radius:12px;padding:16px}
+.province-panel-intro{align-items:baseline;margin-bottom:12px}
+.province-panel-intro strong{font-size:16px;color:#102f58}
+.province-panel-intro span{font-size:12px}
+.provinces{grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.province{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:130px;border-radius:9px;padding:10px 4px;gap:6px;background:#fff}
+.province .province-icon{width:42px;height:42px;font-size:20px;border-radius:10px}
+.province .province-title{font-size:12px;line-height:1.2}
+.province .province-count{font-size:10px;line-height:1.35}
+.district-finder h3{font-size:17px;margin:0 0 3px;color:#123253}
+.district-finder p{font-size:12px;color:#627889;margin:0 0 13px;line-height:1.5}
+.district-finder select{background:#fff;border:1px solid #d2e4f1;width:100%;min-height:43px;border-radius:8px;padding:10px;color:#1b3b55}
+.district-map-art{margin-top:12px;border-radius:12px;min-height:90px;background:radial-gradient(ellipse at 47% 45%,#7fb2d3 0 21%,transparent 22%),linear-gradient(135deg,#e6f4fc,#d9edfa);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:9px;color:#1c6384}
+.district-map-art span{font-weight:850;letter-spacing:3px;font-size:18px}
+.district-map-art strong{font-size:28px}
+.district-map-art small{font-size:11px;max-width:90px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;clip:rect(0,0,0,0);white-space:nowrap;overflow:hidden}
+#loksewa .loksewa-guide:first-of-type{padding:13px 16px}
+.loksewa-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.loksewa-card{min-height:235px;padding:16px}
+.loksewa-card h3{font-size:15px;line-height:1.4}
+.loksewa-actions{gap:7px}
+.loksewa-actions a{font-size:12px;flex:1;justify-content:center;border:1px solid #dbe7ee;border-radius:9px;padding:9px;text-align:center}
+.loksewa-actions a:first-child{background:#0b3961;color:#fff}
+.office-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.office-list .card{padding:15px}
+.office-list .card h3{font-size:14px}
+.office-list .card p{font-size:12px}
+.office-list .office-link{font-size:12px}
+#about .notice{margin:10px 0 38px}
+@media(max-width:1100px){.grid.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.provinces{grid-template-columns:repeat(4,minmax(0,1fr))}.office-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:850px){.discovery-layout{grid-template-columns:1fr}.provinces{grid-template-columns:repeat(4,minmax(0,1fr))}.stats{margin-inline:-24px}.hero{background-position:center,70% center,center}}
+@media(max-width:580px){.hero{background-image:linear-gradient(95deg,rgba(5,28,51,.94),rgba(7,39,65,.74)),url("assets/nepal-temple-banner-mobile.webp"),url("assets/nepal-heritage-hero.svg");background-position:center,66% center,center;padding-top:34px}.hero-badge{font-size:10px}.hero h1{font-size:clamp(29px,7.9vw,42px)}.hero p{font-size:14px}.hero .search{margin-top:17px}.stats{margin-inline:-17px;grid-template-columns:repeat(2,1fr)}.stats>div{padding:14px 8px 14px 47px;min-height:81px}.stats .stat-icon{left:9px;top:18px}.stats strong{font-size:22px}.stats small{font-size:9px}.grid.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.category-grid .card{min-height:168px;padding:14px 12px}.provinces{grid-template-columns:repeat(2,minmax(0,1fr))}.province{min-height:100px}.loksewa-grid,.office-list{grid-template-columns:1fr}.province-panel-intro{flex-direction:column}.section{padding:35px 0}}
