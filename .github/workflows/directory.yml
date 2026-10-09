@@ -23,3 +23,5 @@ jobs:
           node --check i18n.js
           node --check loksewa-data.js
           node --check loksewa.js
+          node --check citizen-resources-data.js
+          node --check citizen-resources.js
