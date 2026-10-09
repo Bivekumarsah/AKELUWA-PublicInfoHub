@@ -73,6 +73,24 @@ The office index now reports the actual number of records and provides a reset c
 
 **Manual preview checks:** test header navigation on a small screen, close it with Escape and with a selected link, search for `passport`, `Kathmandu`, and `Biratnagar`, then confirm old category filters, province browsing, office search and modal controls still work.
 
+## Phase 8: Five more source-checked municipal homepages and district-to-office discovery
+
+Adds five independently checked municipal government homepages, for **28 indexed organization records** (21 local governments; 7 federal departments):
+
+| Office | Province | District | Official first-party source |
+| --- | --- | --- | --- |
+| Dharan Sub-Metropolitan City | Koshi | Sunsari | https://www.dharan.gov.np/en |
+| Damak Municipality | Koshi | Jhapa | https://www.damakmun.gov.np/en |
+| Dhulikhel Municipality | Bagmati | Kavrepalanchok | https://www.dhulikhelmun.gov.np/en |
+| Banepa Municipality | Bagmati | Kavrepalanchok | https://www.banepamun.gov.np/en |
+| Nepalgunj Sub-Metropolitan City | Lumbini | Banke | https://www.nepalgunjmun.gov.np/en |
+
+All five were checked on **2026-10-09** for government identity and official homepage only; current appointments, fees, eligibility, ward services and uptime are **not** verified.
+
+The provinces/districts section now explains how many **listed local-government homepages** match a selected district and shows a **View listed local government offices** action only if a corresponding source-backed record exists. The action opens the offices section and selects **Local** government level, province and district. Districts without a current record display an honest incomplete-coverage message, not a claim that an office does not exist.
+
+Preview checks before merging: select Bagmati → Kavrepalanchok (2 listed offices), Koshi → Sunsari (2 listed offices), Lumbini → Banke (1 listed office), and a district without indexed offices (no action). Verify reset controls, independent office filters, logo/favicon and mobile layout. This release does not change the main company repository or Toolbox.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
