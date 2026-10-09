@@ -165,6 +165,20 @@ npx serve -l 3000
 ```
 Open http://localhost:3000 and test desktop/mobile, Nepali switching, category links, province/district selections, office filters, Lok Sewa login navigation, tab/keyboard focus, policy links and footer. Note: this feature branch is based on Phase 12, so merging should be coordinated with PR #11 first. Production, corporate site and Toolbox have not been modified.
 
+## Phase 14 — Citizen resources after feature comparison
+
+Compared the public `linktogovernment.com/en` portal on 2026-10-09. PublicInfoHub already has a partial verified government homepage directory, a bilingual search and Nepal geographic index, an official Lok Sewa commission/application directory, responsive design and explanatory policy notices. This Phase 14 adds independent original functionality rather than duplicating the reference site's code, content or database:
+
+- Emergency short-code cards: Police 100 (Nepal Police), Fire 101, Ambulance 102 (published emergency operator list), and Traffic Police 103 (Nepal Police). Every item includes a source link, a tap-to-call button, and a caution about service availability.
+- Seven links to official provincial government portals or Chief Minister's offices, *separate from the seven Lok Sewa portals*.
+- Five original, concise bilingual citizen-navigation guides explaining the relevant responsible government level and leading to the agency's official website, with no unverified fee, document-list or deadline claims.
+- Two source-backed public-service media websites (Gorkhapatra and Radio Nepal); this is not a live news feed.
+- Anti-phishing guidance and source attribution, with existing site disclaimer and correction channels retained.
+
+**Not yet implemented / do not claim:** completeness for 753 local-unit *websites*, 1,354+ portals, every ministry or DAO, comprehensive government contacts/phones, per-organization full information pages, regularly updated notices or news feed, or public submissions via a back end. These need separate verified government data work and, for feedback forms, an approved privacy/security approach. Nepal has 753 local governments, but the indexed PublicInfoHub URLs cover only a partial set.
+
+Run `node --test tests/*.test.mjs`, and review the new `#citizen-resources` section via `git switch feature/phase14-citizen-resources`, `git pull origin feature/phase14-citizen-resources`, and `npx serve -l 3000`. Phase 14 PR builds on Phase 13 and is not merged to production.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
