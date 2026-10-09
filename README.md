@@ -113,6 +113,28 @@ Manual QA before merge: toggle language both ways on desktop/mobile; open Passpo
 
 **Manual preview checklist:** verify homepage, favicon/logo, English/Nepali switch, district-to-office browsing and mobile navigation; inspect page metadata and `/publicinfohub/sitemap.xml` on the preview; after a production merge, confirm the company-domain sitemap and robots policy with a browser or Search Console.
 
+## Phase 12: Nepal Lok Sewa information directory
+
+Adds a dedicated bilingual **Lok Sewa / लोक सेवा** section listing one federal Public Service Commission and all **seven provincial commissions**, classified by government level and province. The directory explains which authority to consult for federal, provincial and local recruitment, and provides links to official commission pages for vacancies, syllabuses, exam centres, results and current application guidance.
+
+**Verified official commission websites (2026-10-09):**
+- Federal: https://psc.gov.np/
+- Koshi: https://psc.koshi.gov.np/
+- Madhesh: https://ppsc.madhesh.gov.np/
+- Bagmati: https://spsc.bagamati.gov.np/
+- Gandaki: https://ppsc.gandaki.gov.np/
+- Lumbini: https://ppsc.lumbini.gov.np/
+- Karnali: https://ppsc.karnali.gov.np/
+- Sudurpashchim: https://psc.sudurpashchim.gov.np/
+
+**Confirmed direct application / login portal links:** Koshi `https://psconline.koshi.gov.np/login`, Lumbini `https://ppsconline.lumbini.gov.np/login`, Karnali `https://ppsconline.karnali.gov.np/` and Sudurpashchim `https://ppsconline.sudurpashchim.gov.np/`. The other commissions link only to their verified websites, because no current direct login URL was independently confirmed.
+
+This is a **third-party directory**, not a government login page. It collects no passwords, applicant documents or payments. Each applicant must consult the specific official advertisement for qualification, deadline, payment, syllabus, exam centre, results and the recruiting authority. **Local government hiring does not have a universal Lok Sewa portal**: some positions are handled by provincial commissions and other positions by the responsible authority.
+
+The new section does not add records to the existing separately verified 28-office general government directory. No corporate-site, Toolbox or Vercel configuration is changed. GitHub Actions validates the eight commission websites and confirmed login-list entries; the draft PR must be previewed and approved before merging.
+
+**Manual review:** verify the header navigation and category card open the Lok Sewa section; test all/federal/provincial and province filters, official site and login links, switch English/Nepali, confirm no embedded login or payment form, and test small-screen presentation.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
