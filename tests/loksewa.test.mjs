@@ -21,12 +21,15 @@ test("Federal and seven provincial Lok Sewa listings are source-backed and uniqu
    assert.ok(new URL(entry.applyUrl).hostname.endsWith(".gov.np"));
   }
  }
- assert.equal(entries.filter(x=>x.applyUrl!==null).length,4);
+ assert.equal(entries.filter(x=>x.applyUrl!==null).length,7);
 });
 test("Only confirmed provincial login URLs appear",async()=>{
  const entries=vm.runInNewContext((await source("loksewa-data.js"))+"\nLOKSEWA_PORTALS");
  const confirmed=new Map([
   ["koshi","https://psconline.koshi.gov.np/login"],
+  ["madhesh","https://ppsconline.p2.gov.np/login"],
+  ["bagmati","https://ppsconline.bagamati.gov.np/login"],
+  ["gandaki","https://onlineppsc.gandaki.gov.np/login"],
   ["lumbini","https://ppsconline.lumbini.gov.np/login"],
   ["karnali","https://ppsconline.karnali.gov.np/"],
   ["sudurpashchim","https://ppsconline.sudurpashchim.gov.np/"]
