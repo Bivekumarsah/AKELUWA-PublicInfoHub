@@ -20,7 +20,7 @@ test("all published offices have unique IDs, homepage sources and check dates", 
     const cited = new URL(record.sourceUrl);
     assert.equal(official.protocol, "https:");
     assert.equal(cited.protocol, "https:");
-    assert.equal(cited.hostname.replace(/^www\\./,""), official.hostname.replace(/^www\\./,""));
+    assert.equal(cited.hostname.replace("www.", ""), official.hostname.replace("www.", ""));
     assert.ok(official.hostname.endsWith(".gov.np"));
   }
   assert.equal(offices.filter(office => office.level === "Local").length, 3);
