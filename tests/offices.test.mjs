@@ -128,3 +128,35 @@ test("Phase 8 district browsing links only to indexed local-government offices",
   assert.ok(app.includes('$("officeDistrict").value = district;'));
   assert.ok(style.includes('.district-office-action[hidden]{display:none!important}'));
 });
+
+test("Phase 9 provides bilingual UI without mutating office records", async () => {
+  const html = await source("index.html");
+  const app = await source("app.js");
+  const translations = await source("i18n.js");
+  const css = await source("styles.css");
+  assert.ok(html.includes('id="langSwitch"'));
+  assert.ok(html.includes('src="i18n.js"'));
+  assert.ok(html.indexOf('src="i18n.js"') < html.indexOf('src="app.js"'));
+  assert.ok(translations.includes('document.documentElement.lang = uiLanguage'));
+  assert.ok(translations.includes('const uiOfficeName = office'));
+  assert.ok(translations.includes('const uiProvince = value'));
+  assert.ok(translations.includes('not operated, affiliated with') || translations.includes('यो नेपाल सरकारद्वारा सञ्चालित'));
+  assert.ok(app.includes('$("langSwitch").addEventListener("click"'));
+  assert.ok(app.includes('uiLanguage = uiLanguage === "en" ? "ne" : "en"'));
+  assert.ok(app.includes('translateStaticUi();'));
+  assert.ok(app.includes('escapeHtml(uiOfficeName(office))'));
+  assert.ok(app.includes('escapeHtml(uiText(item.name))'));
+  assert.ok(css.includes('.language-switch'));
+  const offices = vm.runInNewContext((await source("offices.js")) + "\nGOVERNMENT_OFFICES");
+  assert.equal(offices.length, 28);
+});
+
+test("Phase 9 dictionary switches languages and uses Devanagari digits", async () => {
+  const dictionary = await source("i18n.js");
+  const english = vm.runInNewContext(dictionary + "\nuiText('Government Offices')");
+  const nepali = vm.runInNewContext(dictionary + "\nuiLanguage='ne';[uiText('Government Offices'), uiProvince('Bagmati'), uiDigits(28)]");
+  assert.equal(english, "Government Offices");
+  assert.equal(nepali[0], "सरकारी कार्यालयहरू");
+  assert.equal(nepali[1], "बागमती");
+  assert.equal(nepali[2], "२८");
+});
