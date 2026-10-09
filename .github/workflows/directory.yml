@@ -21,3 +21,4 @@ jobs:
           node --check app.js
           node --check offices.js
           node --check i18n.js
+          node --check share.js
