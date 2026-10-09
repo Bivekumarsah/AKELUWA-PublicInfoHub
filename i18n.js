@@ -74,6 +74,7 @@ const UI_STATIC = [
   ["#offices .heading p","A source-backed directory of government homepages across all seven provinces. Browse the growing selection of official government websites. Filter by province, office location district, category or government level. Selecting a district shows indexed headquarters there, not every public service available locally."],
   [".office-toolbar label","Find a government office"],
   ["#resetOfficeFilters","Reset office filters"],
+  ["#shareOfficeSearch","Copy office search link","कार्यालय खोजको लिङ्क प्रतिलिपि गर्नुहोस्"],
   [".office-caution","Government organization identities and homepage links were checked on 9 October 2026. Fees, documents, appointments and local office availability must be confirmed on the linked government website."],
   [".bottom p","Public information made easier to discover."]
 ];
