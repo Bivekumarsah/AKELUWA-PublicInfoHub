@@ -113,6 +113,22 @@ Manual QA before merge: toggle language both ways on desktop/mobile; open Passpo
 
 **Manual preview checklist:** verify homepage, favicon/logo, English/Nepali switch, district-to-office browsing and mobile navigation; inspect page metadata and `/publicinfohub/sitemap.xml` on the preview; after a production merge, confirm the company-domain sitemap and robots policy with a browser or Search Console.
 
+## Phase 11: Shareable government office directory searches
+
+The office directory includes a **Copy office search link** control. It creates a URL using the existing `/publicinfohub/` path, an `#offices` fragment, and optional query parameters: `office`, `category`, `province`, `district`, `level`. This allows a visitor to share an already-filtered list of government organization **homepages**, not a claim of service availability.
+
+The page applies these parameters on initial load. Invalid values are discarded, province/district combinations are validated against existing office records, and free-text queries are limited to 120 characters. The original office records, source links, and all prior disclaimers remain unchanged. The share control is bilingual; it uses the browser clipboard where permitted and prompts with the URL if clipboard access is blocked.
+
+**Manual preview tests:** select Bagmati → Kavrepalanchok → Local, then copy the link and open it in a private tab; confirm the same filtered results. Check an English/Nepali language switch, clear/reset filters, use the share button in both languages, and test a malformed URL such as `?province=Invalid&district=Wrong`. Test both standalone and company-domain routes after production deployment. Query URLs remain canonically associated with the Phase 10 company-domain directory homepage.
+
+## GitHub Pages online preview (independent of Vercel)
+
+This repository includes a `PublicInfoHub GitHub Pages preview` workflow on `feature/**` branches. It runs the project tests and publishes only the actual static HTML, CSS, JavaScript and brand assets, with a **noindex** robots directive on the review build. The preview does not affect the company domain or the Vercel production deployment.
+
+**One-time setup by repository administrator:** in GitHub open **Settings → Pages → Build and deployment → Source → GitHub Actions**, and save. GitHub's default Actions token cannot create/enable a Pages site automatically. Once enabled, rerun the latest **PublicInfoHub GitHub Pages preview** workflow through **Actions**. On success, find the live link under the `github-pages` environment or deploy job. The expected project Pages URL pattern is `https://bivekumarsah.github.io/AKELUWA-PublicInfoHub/`, but the actual link is confirmed only after a successful deployment.
+
+GitHub Pages has its own limits and workflow usage; it does **not** count toward the Vercel deployment limit. Because this repository has a single Pages site, publishing a different feature branch can replace the previous Pages preview. It is a review environment, not a separate permanent production domain.
+
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
 
