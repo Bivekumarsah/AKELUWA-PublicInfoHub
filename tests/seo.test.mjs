@@ -51,7 +51,7 @@ test("Sitemap contains only real canonical page and nested Vercel routing stays 
 test("Existing bilingual dependencies execute in order; essential logo loads eagerly", async () => {
   const html = await source("index.html");
   const scripts = [...html.matchAll(/<script src="([^"]+)" defer><\/script>/g)].map(match => match[1]);
-  assert.deepEqual(scripts, ["data.js","offices.js","i18n.js","share.js","app.js"]);
+  assert.deepEqual(scripts, ["data.js","offices.js","i18n.js","share.js","app.js","loksewa-data.js","loksewa.js"]);
   assert.ok(html.includes('class="brand-logo" src="assets/publicinfohub-logo.webp" fetchpriority="high"'));
   assert.ok(html.includes('id="langSwitch"'));
   assert.ok(html.includes('id="officeGrid"'));

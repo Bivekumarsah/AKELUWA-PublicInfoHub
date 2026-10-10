@@ -113,21 +113,57 @@ Manual QA before merge: toggle language both ways on desktop/mobile; open Passpo
 
 **Manual preview checklist:** verify homepage, favicon/logo, English/Nepali switch, district-to-office browsing and mobile navigation; inspect page metadata and `/publicinfohub/sitemap.xml` on the preview; after a production merge, confirm the company-domain sitemap and robots policy with a browser or Search Console.
 
-## Phase 11: Shareable government office directory searches
+## Phase 12: Nepal Lok Sewa information directory
 
-The office directory includes a **Copy office search link** control. It creates a URL using the existing `/publicinfohub/` path, an `#offices` fragment, and optional query parameters: `office`, `category`, `province`, `district`, `level`. This allows a visitor to share an already-filtered list of government organization **homepages**, not a claim of service availability.
+Adds a dedicated bilingual **Lok Sewa / लोक सेवा** section listing one federal Public Service Commission and all **seven provincial commissions**, classified by government level and province. The directory explains which authority to consult for federal, provincial and local recruitment, and provides links to official commission pages for vacancies, syllabuses, exam centres, results and current application guidance.
 
-The page applies these parameters on initial load. Invalid values are discarded, province/district combinations are validated against existing office records, and free-text queries are limited to 120 characters. The original office records, source links, and all prior disclaimers remain unchanged. The share control is bilingual; it uses the browser clipboard where permitted and prompts with the URL if clipboard access is blocked.
+**Verified official commission websites (2026-10-09):**
+- Federal: https://psc.gov.np/
+- Koshi: https://psc.koshi.gov.np/
+- Madhesh: https://ppsc.madhesh.gov.np/
+- Bagmati: https://spsc.bagamati.gov.np/
+- Gandaki: https://ppsc.gandaki.gov.np/
+- Lumbini: https://ppsc.lumbini.gov.np/
+- Karnali: https://ppsc.karnali.gov.np/
+- Sudurpashchim: https://psc.sudurpashchim.gov.np/
 
-**Manual preview tests:** select Bagmati → Kavrepalanchok → Local, then copy the link and open it in a private tab; confirm the same filtered results. Check an English/Nepali language switch, clear/reset filters, use the share button in both languages, and test a malformed URL such as `?province=Invalid&district=Wrong`. Test both standalone and company-domain routes after production deployment. Query URLs remain canonically associated with the Phase 10 company-domain directory homepage.
+**Federal application/login:** `https://psconline1.psc.gov.np/#/login` (user-supplied official `.gov.np` URL).\n\n**Direct provincial application/login links:** Koshi `https://psconline.koshi.gov.np/login`, Madhesh `https://ppsconline.p2.gov.np/login`, Bagmati `https://ppsconline.bagamati.gov.np/login`, Gandaki `https://onlineppsc.gandaki.gov.np/login`, Lumbini `https://ppsconline.lumbini.gov.np/login`, Karnali `https://ppsconline.karnali.gov.np/` and Sudurpashchim `https://ppsconline.sudurpashchim.gov.np/`. The Madhesh link is documented in official application notices but a direct live page fetch timed out during this update; Bagmati and Gandaki presented online recruitment system login apps. The federal commission also provides the application/login URL above; all eight commissions now have direct application links.
 
-## GitHub Pages online preview (independent of Vercel)
+This is a **third-party directory**, not a government login page. It collects no passwords, applicant documents or payments. Each applicant must consult the specific official advertisement for qualification, deadline, payment, syllabus, exam centre, results and the recruiting authority. **Local government hiring does not have a universal Lok Sewa portal**: some positions are handled by provincial commissions and other positions by the responsible authority.
 
-This repository includes a `PublicInfoHub GitHub Pages preview` workflow on `feature/**` branches. It runs the project tests and publishes only the actual static HTML, CSS, JavaScript and brand assets, with a **noindex** robots directive on the review build. The preview does not affect the company domain or the Vercel production deployment.
+The new section does not add records to the existing separately verified 28-office general government directory. No corporate-site, Toolbox or Vercel configuration is changed. GitHub Actions validates the eight commission websites and confirmed login-list entries; the draft PR must be previewed and approved before merging.
 
-**One-time setup by repository administrator:** in GitHub open **Settings → Pages → Build and deployment → Source → GitHub Actions**, and save. GitHub's default Actions token cannot create/enable a Pages site automatically. Once enabled, rerun the latest **PublicInfoHub GitHub Pages preview** workflow through **Actions**. On success, find the live link under the `github-pages` environment or deploy job. The expected project Pages URL pattern is `https://bivekumarsah.github.io/AKELUWA-PublicInfoHub/`, but the actual link is confirmed only after a successful deployment.
+**Manual review:** verify the header navigation and category card open the Lok Sewa section; test all/federal/provincial and province filters, official site and login links, switch English/Nepali, confirm no embedded login or payment form, and test small-screen presentation.
 
-GitHub Pages has its own limits and workflow usage; it does **not** count toward the Vercel deployment limit. Because this repository has a single Pages site, publishing a different feature branch can replace the previous Pages preview. It is a review environment, not a separate permanent production domain.
+## Phase 13 reference-photo banner handoff
+
+The premium homepage CSS now matches the approved photo-led Nepal layout with six category cards, seven province choices, a 77-district dropdown, Lok Sewa, office directory and mobile responsiveness. **The two user-supplied panorama photos are not in GitHub yet**: GitHub text-file editing cannot transfer their binary bytes. The CSS already references:
+
+- `assets/nepal-temple-banner.webp` (desktop panorama)
+- `assets/nepal-temple-banner-mobile.webp` (mobile panorama)
+
+To see the **exact supplied photographs** locally, obtain `AKELUWA_Phase13_Photo_Banners.zip` from the ChatGPT conversation and unzip the enclosed `assets/` folder into this repository root (alongside `index.html`). They were optimized as WebP (~151 KB and ~167 KB). Without them, the existing original `assets/nepal-heritage-hero.svg` displays as the fallback, so the site remains functional. To include the photos in the development PR, commit and push these assets to this feature branch only when approved.
+
+No image, page, emblem or website domain in the generated concept screenshot should be represented as a real government affiliation. Accurate information and actual source links take precedence over literal placeholder labels. The user's original brand logo remains unchanged.
+
+## Phase 13 — Premium original UI and complete site footer
+
+This branch builds on Phase 12, retaining the original company-approved PublicInfoHub logo, all government directory records, the federal + provincial Lok Sewa application links, English/Nepali interface, province/district selectors, filters, and search.
+
+**Nepal heritage visual update:** Hero now includes original responsive `assets/nepal-heritage-hero.svg` illustrating Himalayan peaks and a traditional pagoda, with dark overlays for legible headings and search controls. This is custom vector illustration rather than a photograph or a reproduction of any specific protected historical image. Six distinctive category treatments now include Local Services; seven province-selection cards have ordinal number badges and accurate labels/district counts rather than speculative geographic outlines. All directory interactions and English/Nepali translations are preserved. No live remote image loading required.
+
+**Design:** Original civic-tech homepage styling (deep navy, teal accents, restrained premium cards, accessible focus states, mobile and tablet breakpoints, reduced-motion styling), clear hero search, popular starting points, government-directory navigation, geographic browsing and section labels. The visual concept is original; no third-party template or government identity has been copied. Any illustrated design references are **not** production assets. The product remains an independent information directory and makes no government affiliation claim.
+
+**Footer:** Product identity and accountable operator (AKELUWA Softwarehub), links to existing directories, in-page About/Privacy/Terms/Accessibility/Sources notices, safe official company contact route (no invented email address or phone), independent-directory disclaimer, automatically updated copyright year and back-to-top link. The legal-information text is a plain-language **starting point, not a compliance audit or legal opinion**; review it against actual deployment, analytics, cookies, and applicable Nepal law before release. Claims describe current static client behavior only.
+
+**Review locally:**
+```powershell
+git fetch origin
+git switch feature/phase13-premium-ui-footer
+git pull origin feature/phase13-premium-ui-footer
+npx serve -l 3000
+```
+Open http://localhost:3000 and test desktop/mobile, Nepali switching, category links, province/district selections, office filters, Lok Sewa login navigation, tab/keyboard focus, policy links and footer. Note: this feature branch is based on Phase 12, so merging should be coordinated with PR #11 first. Production, corporate site and Toolbox have not been modified.
 
 ## Next steps
 Add verified government source data, a persistent database, administration workflows, Nepali translations, accessible routing and SEO pages.
