@@ -88,7 +88,7 @@ test("Phase 7 navigation and directory search work with accessible markup", asyn
   assert.ok(script.includes('menuToggle.addEventListener("click"'));
   assert.ok(script.includes('link.addEventListener("click", closeMenu)'));
   assert.ok(script.includes('const officeMatches=GOVERNMENT_OFFICES.some'));
-  assert.ok(script.includes('if (index === 0)'));
+  assert.ok(script.includes('if(index===3){$("offices").scrollIntoView'));
   assert.ok(css.includes('.links.open{display:flex}'));
   assert.ok(css.includes('.skip-link:focus'));
   assert.ok(css.includes('prefers-reduced-motion:reduce'));
