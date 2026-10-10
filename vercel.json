@@ -144,6 +144,6 @@
     }
   ],
   "git": {
-    "deploymentEnabled": false
+    "deploymentEnabled": true
   }
 }
