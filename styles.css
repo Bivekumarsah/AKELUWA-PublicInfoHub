@@ -307,3 +307,55 @@ body{background:#f8fbfd}
 @media(max-width:580px){.hero{background-image:linear-gradient(95deg,rgba(5,28,51,.94),rgba(7,39,65,.74)),url("assets/nepal-temple-banner-mobile.webp"),url("assets/nepal-heritage-hero.svg");background-position:center,66% center,center;padding-top:34px}.hero-badge{font-size:10px}.hero h1{font-size:clamp(29px,7.9vw,42px)}.hero p{font-size:14px}.hero .search{margin-top:17px}.stats{margin-inline:-17px;grid-template-columns:repeat(2,1fr)}.stats>div{padding:14px 8px 14px 47px;min-height:81px}.stats .stat-icon{left:9px;top:18px}.stats strong{font-size:22px}.stats small{font-size:9px}.grid.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.category-grid .card{min-height:168px;padding:14px 12px}.provinces{grid-template-columns:repeat(2,minmax(0,1fr))}.province{min-height:100px}.loksewa-grid,.office-list{grid-template-columns:1fr}.province-panel-intro{flex-direction:column}.section{padding:35px 0}}
 
 
+
+
+/* Phase 13 mobile presentation repair: prevent header/hero overflow. */
+html,body{max-width:100%;overflow-x:clip}
+.hero{background-image:linear-gradient(95deg,rgba(5,28,51,.88),rgba(7,39,65,.7)),url("assets/nepal-heritage-hero.svg");background-size:cover;background-position:center}
+.brand{min-width:0}
+.brand-name{min-width:0;white-space:normal;line-height:1.2}
+.brand-tagline{display:block;white-space:normal}
+.popular-searches{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.popular-searches a{display:inline-flex;white-space:nowrap}
+@media(max-width:850px){
+  .nav{gap:8px}
+  .nav>.pill{display:none}
+  .brand{flex:1 1 auto;overflow:hidden}
+  .brand-logo{flex:0 0 auto}
+  .language-switch,.menu-toggle{flex:0 0 auto}
+  .hero{background-image:linear-gradient(95deg,rgba(5,28,51,.93),rgba(7,39,65,.79)),url("assets/nepal-heritage-hero.svg")}
+}
+@media(max-width:580px){
+  .wrap{padding-left:18px;padding-right:18px}
+  .nav{height:auto;min-height:68px;gap:6px}
+  .brand{gap:5px}
+  .brand-logo{width:39px;max-height:37px}
+  .brand-name{font-size:12px;letter-spacing:-.35px}
+  .brand-name>span{font-size:12px}
+  .brand-tagline{display:none}
+  .menu-toggle{font-size:13px;padding:9px 8px}
+  .language-switch{font-size:12px;padding:9px 7px}
+  .hero{padding:36px 0 48px;background-position:center}
+  .hero .heritage-caption{display:none}
+  .hero-badge{display:inline-flex;max-width:100%;white-space:normal}
+  .hero h1{font-size:clamp(30px,8vw,39px);letter-spacing:-1px;overflow-wrap:break-word}
+  .hero h1 br{display:none}
+  .hero p{font-size:15px;line-height:1.65}
+  .hero .search{width:100%;max-width:100%;gap:4px}
+  .hero .search input{width:0;min-width:0;padding:11px 7px}
+  .hero .search button{flex-shrink:0;padding:0 13px}
+  .popular-searches{gap:8px 10px;font-size:12px;line-height:1.5}
+  .popular-searches>span{flex-basis:100%}
+  .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:28px 0 0;box-shadow:none}
+  .stats>div{min-width:0;padding:14px 10px;min-height:92px;border-radius:12px}
+  .stats .stat-icon{position:static;display:inline-block;margin-bottom:4px}
+  .stats strong{font-size:21px}
+  .stats small{overflow-wrap:anywhere}
+  .grid.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:360px){
+  .brand-logo{width:32px}
+  .brand-name,.brand-name>span{font-size:10px}
+  .menu-toggle span{display:none}
+  .hero .search button{padding:0 9px}
+}
