@@ -311,7 +311,7 @@ body{background:#f8fbfd}
 
 /* Phase 13 mobile presentation repair: prevent header/hero overflow. */
 html,body{max-width:100%;overflow-x:clip}
-.hero{background-image:linear-gradient(95deg,rgba(5,28,51,.88),rgba(7,39,65,.7)),url("assets/nepal-heritage-hero.svg");background-size:cover;background-position:center}
+.hero{background-image:linear-gradient(95deg,rgba(5,28,51,.88),rgba(7,39,65,.7)),url("assets/nepal-temple-banner.webp");background-size:cover;background-position:center}
 .brand{min-width:0}
 .brand-name{min-width:0;white-space:normal;line-height:1.2}
 .brand-tagline{display:block;white-space:normal}
@@ -323,7 +323,7 @@ html,body{max-width:100%;overflow-x:clip}
   .brand{flex:1 1 auto;overflow:hidden}
   .brand-logo{flex:0 0 auto}
   .language-switch,.menu-toggle{flex:0 0 auto}
-  .hero{background-image:linear-gradient(95deg,rgba(5,28,51,.93),rgba(7,39,65,.79)),url("assets/nepal-heritage-hero.svg")}
+  .hero{background-image:linear-gradient(95deg,rgba(5,28,51,.93),rgba(7,39,65,.79)),url("assets/nepal-temple-banner-mobile.webp")}
 }
 @media(max-width:580px){
   .wrap{padding-left:18px;padding-right:18px}
