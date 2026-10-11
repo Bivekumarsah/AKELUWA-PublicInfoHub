@@ -2,6 +2,27 @@
 
 A lightweight standalone geographic directory with seven provinces, 77 districts, searchable names, sample service filters, service detail dialogs and links to government department homepages.
 
+## October 2026 reliability, discovery and SEO update
+
+The interactive directory at `/publicinfohub/` now has **alphabetical, province-first, and latest-homepage-check sorting** for its government-office cards. The Passport and PAN shortcuts populate real service searches instead of just scrolling to an unfiltered section. Search remains entirely in the browser, and sorting is available in both English and Nepali.
+
+A separate **server-readable, no-JavaScript office directory** is available at `/publicinfohub/offices/` on the company domain (or `/offices/` when hosted at the standalone origin). The page contains the currently documented 28 organization homepage records, grouped by Nepal's seven provinces, with their existing source URLs, checked dates and current limits of verification. This second URL is in the project's sitemap and linked from the interactive page.
+
+**Updating the records:** `offices.js` remains the source of truth for the interactive site. When adding or changing checked offices, also regenerate/reconcile `offices/index.html`, the homepage directory count/link, and the sitemap as appropriate. `tests/office-index.test.mjs` deliberately fails if the static index is inconsistent with the office records. Only use checked first-party sources and genuine check dates. An organization homepage being checked does **not** prove current fees, procedures, appointments, or district-level service delivery.
+
+To verify locally (Node.js 22+):
+```sh
+node --test tests/*.test.mjs
+node --check data.js
+node --check offices.js
+node --check office-discovery.js
+node --check share.js
+node --check app.js
+node --check i18n.js
+```
+
+The existing public domain uses the independently deployed PublicInfoHub Vercel site as upstream for the Company route; a Company redeployment is not normally required for these static improvements. Continue to verify nested `/publicinfohub/` and `/publicinfohub/offices/` routes after deployment.
+
 ## PublicInfoHub branding
 
 The responsive navigation header displays `assets/publicinfohub-logo.webp`, resized directly from the user's approved blue-A-and-globe artwork. The browser favicon at `assets/publicinfohub-favicon.webp` uses the **same exact design**, resized for a tab icon (no substituted information emblem). Both are self-hosted in the PublicInfoHub repository and work through the `/publicinfohub/` nested route; they do not affect the main AKELUWA company logo or AKELUWA Toolbox. Because these are compact web assets, retain the original high-resolution master image for future marketing and print design.
