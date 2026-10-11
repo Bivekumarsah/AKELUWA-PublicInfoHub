@@ -32,13 +32,18 @@ test("SEO structured data describes an independent directory, not a government a
   assert.ok(!entities.some(item => ["GovernmentOrganization","GovernmentOffice"].includes(item["@type"])));
 });
 
-test("Sitemap contains only real canonical page and nested Vercel routing stays supported", async () => {
+test("Sitemap contains real canonical pages and nested Vercel routing stays supported", async () => {
   const sitemap = await source("sitemap.xml");
   const robots = await source("robots.txt");
   const deployment = JSON.parse(await source("vercel.json"));
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 1);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 2);
+  assert.ok(sitemap.includes("<loc>" + canonical + "offices/</loc>"));
   assert.ok(sitemap.includes("<loc>" + canonical + "</loc>"));
   assert.ok(!sitemap.includes("https://publicinfohub.vercel.app/"));
+  const directory=await source("offices/index.html");
+  assert.ok(directory.includes('<link rel="canonical" href="' + canonical + 'offices/">'));
+  assert.ok(directory.includes('href="../styles.css"'));
+  assert.ok((await source("index.html")).includes('href="offices/"'));
   assert.ok(robots.includes("Sitemap: " + canonical + "sitemap.xml"));
   assert.ok(deployment.rewrites.some(route => route.source === "/publicinfohub/:path*" && route.destination === "/:path*"));
   const routes = new Set(deployment.headers.map(item => item.source));
