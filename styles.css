@@ -377,3 +377,11 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:700px){
   .office-toolbar .office-sort-label{flex:1 0 100%;min-width:0;width:100%}
 }
+
+/* Source-backed, JavaScript-free index entry from the interactive directory. */
+.office-directory-entry{margin:12px 0 18px}
+.office-directory-entry a{display:inline-flex;align-items:center;min-height:44px;
+ padding:10px 14px;background:#e6f4f9;border:1px solid #bee2ef;border-radius:10px;
+ color:#0d4a70;font-weight:750;text-decoration:none}
+.office-directory-entry a:hover{background:#d7edf6}
+.office-directory-entry a:focus-visible{outline:3px solid #c67518;outline-offset:3px}
