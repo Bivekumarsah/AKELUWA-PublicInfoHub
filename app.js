@@ -104,6 +104,7 @@ function initOfficeFilters() {
   const coverageCount = new Set(GOVERNMENT_OFFICES.filter(office => office.level === "Local").map(office => office.province)).size;
   $("officeSummary").textContent = uiLanguage === "ne" ? uiDigits(GOVERNMENT_OFFICES.length)+" सूचीकृत सरकारी वेबसाइट ("+uiDigits(localCount)+" स्थानीय तह, "+uiDigits(GOVERNMENT_OFFICES.length-localCount)+" संघीय विभाग), "+uiDigits(coverageCount)+" प्रदेशमा। यो आंशिक निर्देशिका हो, पूर्ण राष्ट्रिय अभिलेख होइन।" : GOVERNMENT_OFFICES.length + " indexed government organization homepages (" + localCount + " local governments, " + (GOVERNMENT_OFFICES.length - localCount) + " federal departments) across " + coverageCount + " provinces. This is a partial directory, not a complete nationwide registry.";
   $("resetOfficeFilters").addEventListener("click", () => {
+    $("officeSort").value = "name";
     $("officeSearch").value = "";
     $("officeCategory").value = "All";
     $("officeLevel").value = "All";
@@ -115,9 +116,11 @@ function initOfficeFilters() {
   $("officeSearch").addEventListener("input", renderOffices);
   $("officeCategory").addEventListener("change", renderOffices);
   $("officeLevel").addEventListener("change", renderOffices);
+  $("officeSort").addEventListener("change", renderOffices);
   districtSelect.addEventListener("change", renderOffices);
   provinceSelect.addEventListener("change", refreshDistrictOptions);
   refreshDistrictOptions();
+  updateOfficeSortLabels();
   // Populate only known, valid filters from a copied URL.
   const restored=readOfficeLink(window.location.search,GOVERNMENT_OFFICES,NEPAL_REGIONS);
   $("officeSearch").value=restored.search;
@@ -148,23 +151,34 @@ function initOfficeFilters() {
   });
 }
 
+// Keep the sort labels bilingual while preserving the user's selected order.
+function updateOfficeSortLabels() {
+  const select = $("officeSort");
+  const labels = uiLanguage === "ne"
+    ? ["नाम अनुसार", "प्रदेश र नाम अनुसार", "हालसालै जाँच गरिएको"]
+    : ["Name A–Z", "Province then name", "Recently checked"];
+  select.parentElement.firstChild.nodeValue = uiLanguage === "ne" ? "कार्यालय क्रमबद्ध गर्नुहोस्" : "Sort offices";
+  select.setAttribute("aria-label", uiLanguage === "ne" ? "सरकारी कार्यालयको सूची क्रमबद्ध गर्नुहोस्" : "Sort listed government offices");
+  [...select.options].forEach((option,index)=>{option.textContent=labels[index]});
+}
+
 function renderOffices() {
   const officeQuery = $("officeSearch").value.trim().toLocaleLowerCase();
   const officeCategory = $("officeCategory").value;
   const officeProvince = $("officeProvince").value;
   const officeDistrict = $("officeDistrict").value;
   const officeLevel = $("officeLevel").value;
-  const matches = GOVERNMENT_OFFICES.filter(office =>
+  const matches = sortDirectoryOffices(GOVERNMENT_OFFICES.filter(office =>
     (officeCategory === "All" || office.category === officeCategory) &&
     (officeProvince === "All" || office.province === officeProvince) &&
     (officeDistrict === "All" || office.district === officeDistrict) &&
     (officeLevel === "All" || office.level === officeLevel) &&
     (!officeQuery || [office.name, office.nameNe, office.category, uiText(office.category), office.level, office.city, office.province, uiProvince(office.province), office.district, office.description]
       .join(" ").toLocaleLowerCase().includes(officeQuery))
-  );
+  ), $("officeSort").value, uiLanguage);
   $("officeCount").textContent = uiLanguage === "ne" ? uiDigits(matches.length)+" जाँच गरिएका सरकारी वेबसाइट भेटिए" : matches.length + " checked government organization homepage" + (matches.length === 1 ? "" : "s") + " found";
   $("officeGrid").innerHTML = matches.length ? matches.map(office =>
-    '<article class="card office-card"><div class="office-meta"><span class="tag">' + escapeHtml(uiText(office.category)) +
+    '<article class="card office-card" id="office-' + escapeHtml(office.id) + '"><div class="office-meta"><span class="tag">' + escapeHtml(uiText(office.category)) +
     ' · ' + escapeHtml(uiText(office.level)) + '</span><span class="verified-label">' + escapeHtml(uiText('Official homepage checked')) + '</span></div><h3>' + escapeHtml(uiOfficeName(office)) +
     '</h3><p class="office-ne">' + escapeHtml(office.nameNe) +
     '</p><p>' + escapeHtml(uiLanguage === 'ne' ? 'आधिकारिक सरकारी वेबसाइट र सूचना। हालको सेवा विवरण सम्बन्धित कार्यालयमै पुष्टि गर्नुहोस्।' : office.description) +
@@ -246,6 +260,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const coverage=new Set(GOVERNMENT_OFFICES.filter(office=>office.level==="Local").map(office=>office.province)).size;
     $("officeSummary").textContent=uiLanguage==="ne" ? uiDigits(GOVERNMENT_OFFICES.length)+" सूचीकृत सरकारी वेबसाइट ("+uiDigits(locals)+" स्थानीय तह, "+uiDigits(GOVERNMENT_OFFICES.length-locals)+" संघीय विभाग), "+uiDigits(coverage)+" प्रदेशमा। यो आंशिक निर्देशिका हो, पूर्ण राष्ट्रिय अभिलेख होइन।" : GOVERNMENT_OFFICES.length+" indexed government organization homepages ("+locals+" local governments, "+(GOVERNMENT_OFFICES.length-locals)+" federal departments) across "+coverage+" provinces. This is a partial directory, not a complete nationwide registry.";
     render();
+    updateOfficeSortLabels();
     renderOffices();
     translateLoksewa();
     if(quickDistrict){
@@ -256,6 +271,20 @@ document.addEventListener("DOMContentLoaded",()=>{
   initOfficeFilters();
   $("modal").setAttribute("aria-hidden","true");
   $("modal").setAttribute("aria-labelledby","dialogTitle");
+  // Popular searches perform the action they describe, instead of only scrolling
+  // to an unfiltered directory. Links retain their anchor destinations without JS.
+  document.querySelectorAll("[data-quick-search]").forEach(link => {
+    link.addEventListener("click", event => {
+      const phrase = link.dataset.quickSearch;
+      if(!phrase)return;
+      event.preventDefault();
+      query=phrase.trim().toLocaleLowerCase();
+      category="All";
+      $("searchInput").value=phrase;
+      render();
+      $("services").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+  });
   $("searchForm").addEventListener("submit",event=>{
     event.preventDefault();query=$("searchInput").value.trim().toLowerCase();render();
     const districtMatches=NEPAL_REGIONS.some(region=>[region.name,uiProvince(region.name)].some(n=>n.toLocaleLowerCase().includes(query))||region.districts.some(d=>d.toLocaleLowerCase().includes(query)));
