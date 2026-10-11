@@ -43,11 +43,18 @@ test("Nepal heritage hero is original local artwork and all six categories are f
  const css=await read("styles.css");
  const app=await read("app.js");
  const words=await read("i18n.js");
- const art=await read("assets/nepal-heritage-hero.svg");
- assert.ok(art.startsWith("<svg"));
- assert.ok(art.includes("traditional pagoda architecture"));
- assert.ok(css.includes('url("assets/nepal-heritage-hero.svg")'));
+ // The heritage SVG was intentionally replaced with responsive local WebP art.
+ // Check real image bytes and references, instead of requiring a removed asset.
+ const desktop=await readFile(new URL("../assets/nepal-temple-banner.webp",import.meta.url));
+ const mobile=await readFile(new URL("../assets/nepal-temple-banner-mobile.webp",import.meta.url));
+ for(const image of [desktop,mobile]){
+   assert.ok(image.length>1000,"hero image must be non-empty");
+   assert.equal(image.toString("ascii",0,4),"RIFF","hero image must have a WebP RIFF header");
+   assert.equal(image.toString("ascii",8,12),"WEBP","hero image must actually be WebP");
+ }
  assert.ok(css.includes('url("assets/nepal-temple-banner.webp")'));
+ assert.ok(css.includes('url("assets/nepal-temple-banner-mobile.webp")'));
+ assert.ok(!css.includes("nepal-heritage-hero.svg"),"removed artwork cannot remain referenced");
  assert.equal((html.match(/class="symbol icon-/g)||[]).length,6);
  assert.ok(html.includes('class="symbol icon-local"'));
  assert.ok(app.includes('if(index===5){$("provinces-section").scrollIntoView'));
