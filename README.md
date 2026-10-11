@@ -2,6 +2,23 @@
 
 A lightweight standalone geographic directory with seven provinces, 77 districts, searchable names, sample service filters, service detail dialogs and links to government department homepages.
 
+## Citizen utilities update — October 2026
+
+Eight individual, crawlable utility pages were added under `/publicinfohub/utilities/` and linked from the main directory:
+
+- `bs-ad-date-converter/` — AD ↔ BS conversion using pinned MIT-licensed `nepali-date-converter@3.4.0` via jsDelivr (requires a working connection to load the date engine). The dataset cannot predict revised future calendar dates.
+- `nepal-age-calculator/` — date-of-birth input in AD or BS, Gregorian years/months/days output; confirm recruiting authority's cut-off rules.
+- `nepal-tax-ssf-calculator/` — configurable salary/SSF breakdown, defaults 11% employee and 20% employer from [SSF FAQ](https://www.ssf.gov.np/images/page_content/16428652398814_faq_ssf.pdf). **Income tax is not calculated from unverified slabs**; user supplies payroll withholding. Refer to [IRD current rates](https://ird.gov.np/category/taxrateincentives/).
+- `official-form-finder/` — browser search over curated source-backed government department and official portal links; no applicant records collected.
+- `document-checklist-guides/` — browser checkboxes for general preparation steps, never presented as an official required-document list.
+- `government-office-map/` — province-filtered map searches based on 28 existing homepage-verified directory records. **No GPS coordinates or map pins are verified.**
+- `nepal-holiday-calendar/` — Gregorian month browser with a link to [MoHA's official 2083 BS holiday notice](https://moha.gov.np/en/page/government-and-public-holidays-in-2083); deliberately **does not label dates as holidays** until government dates can be reliably maintained.
+- `official-exam-portal-directory/` — reuses the 8 federal/provincial Lok Sewa commission application portal records; no candidate credentials stored.
+
+All tools are independent and free. The calculations work in the browser, and there are no new backend dependencies. The date-conversion tool relies on a fixed third-party CDN version; configure self-hosting only after reviewing the library license and calendar data. Tax, official form, public holidays, office locations, and exam eligibility remain subject to official verification. Updating source records must update linked detail pages. Company proxy integration uses the pre-existing `/publicinfohub/:path*` rewrite and Next.js route handler; changes become live only after a successful PublicInfoHub deployment.
+
+Local checks: `node --test tests/*.test.mjs`, `node --check utilities/utility.js` and manual mobile browser checks.
+
 ## October 2026 reliability, discovery and SEO update
 
 The interactive directory at `/publicinfohub/` now has **alphabetical, province-first, and latest-homepage-check sorting** for its government-office cards. The Passport and PAN shortcuts populate real service searches instead of just scrolling to an unfiltered section. Search remains entirely in the browser, and sorting is available in both English and Nepali.

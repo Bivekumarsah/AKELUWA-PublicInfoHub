@@ -36,8 +36,9 @@ test("Sitemap contains real canonical pages and nested Vercel routing stays supp
   const sitemap = await source("sitemap.xml");
   const robots = await source("robots.txt");
   const deployment = JSON.parse(await source("vercel.json"));
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 2);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 11);
   assert.ok(sitemap.includes("<loc>" + canonical + "offices/</loc>"));
+  assert.ok(sitemap.includes("<loc>" + canonical + "utilities/</loc>"));
   assert.ok(sitemap.includes("<loc>" + canonical + "</loc>"));
   assert.ok(!sitemap.includes("https://publicinfohub.vercel.app/"));
   const directory=await source("offices/index.html");
