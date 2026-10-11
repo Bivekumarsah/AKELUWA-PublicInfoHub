@@ -120,6 +120,7 @@ const UI_STATIC = [
   ["#services h2","Discover public services"],
   ["#clearFilters","Clear search and filters"],
   ["#offices h2","Government office websites"],
+  ["#officeIndexLink","Browse 28 checked office websites by province →","प्रदेशअनुसार जाँच गरिएका २८ सरकारी वेबसाइट हेर्नुहोस् →"],
   ["#offices .heading p","A source-backed directory of government homepages across all seven provinces. Browse the growing selection of official government websites. Filter by province, office location district, category or government level. Selecting a district shows indexed headquarters there, not every public service available locally."],
   [".office-toolbar label","Find a government office"],
   ["#resetOfficeFilters","Reset office filters"],
