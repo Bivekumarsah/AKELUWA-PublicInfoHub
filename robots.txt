@@ -1,6 +1,12 @@
 User-agent: *
 Allow: /
 
-# Sitemap lists only the canonical, indexable PublicInfoHub homepage.
-# The corporate domain's root robots.txt is owned by its separate website.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# For /publicinfohub/ on the company domain, the company's root
+# robots.txt is authoritative. This file applies to standalone hosts.
 Sitemap: https://www.akeluwasoftwarehub.com.np/publicinfohub/sitemap.xml

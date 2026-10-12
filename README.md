@@ -222,3 +222,14 @@ The standalone Vercel deployment supports both the root of its own deployment an
 The current company integration uses a dedicated proxy route and defaults to `https://publicinfohub.vercel.app` when `PUBLIC_INFO_HUB_ORIGIN` is not set. Do not point the origin back to the company domain, which could create a loop. No change to Toolbox is necessary.
 
 The site still only includes illustrative service entries; do not treat them as verified application instructions.
+
+
+## Company publisher identity and search discoverability
+
+AKELUWA PublicInfoHub is an independent public-information directory produced by **AKELUWA Softwarehub**, a registered company in Nepal. It is **not** a Government of Nepal website, government-endorsed service or official application/payment portal. Its on-page disclaimer and structured data make this separation explicit.
+
+The homepage `WebSite` and `CollectionPage` schema refer to the same AKELUWA Softwarehub Organization ID (`https://www.akeluwasoftwarehub.com.np/#organization`) used by the company website. This is an ownership/disambiguation signal, not proof of an official government relationship.
+
+For AI-assisted search, `robots.txt` explicitly permits OAI-SearchBot and PerplexityBot. When PublicInfoHub is served under `/publicinfohub/` on the company domain, crawlers consult the **company domain's root robots.txt**, not a nested robots file. The company root sitemap should contain the PublicInfoHub homepage, office directory and each actual citizen-utility page. To confirm indexing, use Google Search Console and Bing Webmaster Tools after deployment.
+
+Check canonical URLs, visible ownership statements, and structured data after deployments. Do not create registration-number fields or invented business/social profiles. Neither structured data nor crawler access guarantees AI citations, referrals, or search ranking.
