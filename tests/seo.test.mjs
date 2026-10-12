@@ -29,6 +29,11 @@ test("SEO structured data describes an independent directory, not a government a
   const entities = schema["@graph"];
   assert.ok(entities.some(item => item["@type"] === "WebSite" && item.url === canonical));
   assert.ok(entities.some(item => item["@type"] === "CollectionPage" && item.url === canonical));
+  const publisher = entities.find(item => item["@type"] === "Organization");
+  assert.equal(publisher?.["@id"], "https://www.akeluwasoftwarehub.com.np/#organization");
+  assert.equal(publisher?.name, "AKELUWA Softwarehub");
+  assert.equal(entities.find(item => item["@type"] === "WebSite").publisher["@id"], publisher["@id"]);
+  assert.ok(html.includes("a company registered in Nepal"));
   assert.ok(!entities.some(item => ["GovernmentOrganization","GovernmentOffice"].includes(item["@type"])));
 });
 
